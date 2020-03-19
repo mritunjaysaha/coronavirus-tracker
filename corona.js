@@ -7,6 +7,8 @@ function addData() {
   const totalCases = document.getElementById("total-cases");
   const recovered = document.getElementById("recovered");
   const fatal = document.getElementById("fatal");
+  const confirmedCasesIndian = document.getElementById("confirmed-india");
+  const confirmedCasesForeign = document.getElementById("confirmed-foreign");
   promise
     .then(function(response) {
       const processingPromise = response.json();
@@ -29,17 +31,25 @@ function addData() {
       console.log(processedResponse.data.regional[0]);
       console.log(processedResponse.data.regional[0].loc);
 
-      // let p = document.createElement("p");
-      // p.innerHTML = processedResponse.confirmed.value;
-      // totalCases.appendChild(p);
+      let p = document.createElement("p");
+      p.innerHTML = processedResponse.data.summary.total;
+      totalCases.appendChild(p);
 
-      // p = document.createElement("p");
-      // p.innerHTML = processedResponse.recovered.value;
-      // recovered.appendChild(p);
+      p = document.createElement("p");
+      p.innerHTML = processedResponse.data.summary.discharged;
+      recovered.appendChild(p);
 
-      // p = document.createElement("p");
-      // p.innerHTML = processedResponse.deaths.value;
-      // fatal.appendChild(p);
+      p = document.createElement("p");
+      p.innerHTML = processedResponse.data.summary.deaths;
+      fatal.appendChild(p);
+
+      p = document.createElement("p");
+      p.innerHTML = processedResponse.data.summary.confirmedCasesIndian;
+      confirmedCasesIndian.appendChild(p);
+
+      p = document.createElement("p");
+      p.innerHTML = processedResponse.data.summary.confirmedCasesForeign;
+      confirmedCasesForeign.appendChild(p);
     });
   console.log("here");
 }
