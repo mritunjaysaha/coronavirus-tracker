@@ -1,55 +1,101 @@
 // const URL = "https://covid.mathdro.id/api/countries/India";
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
+
 window.onload = addData;
 
 function addData() {
-  const promise = fetch(URL);
-  const totalCases = document.getElementById("total-cases");
-  const recovered = document.getElementById("recovered");
-  const fatal = document.getElementById("fatal");
-  const confirmedCasesIndian = document.getElementById("confirmed-india");
-  const confirmedCasesForeign = document.getElementById("confirmed-foreign");
-  promise
-    .then(function(response) {
-      const processingPromise = response.json();
-      return processingPromise;
-    })
-    .then(function(processedResponse) {
-      console.log(processedResponse);
-      console.log(processedResponse.data);
+    console.log("here");
+    const promise = fetch(URL);
+    const totalCases = document.getElementById("total-cases");
+    const recovered = document.getElementById("recovered");
+    const fatal = document.getElementById("fatal");
+    const confirmedCasesIndian = document.getElementById("confirmed-india");
+    const confirmedCasesForeign = document.getElementById("confirmed-foreign");
 
-      //Summary of cases in India
-      console.log(processedResponse.data.summary);
-      console.log(processedResponse.data.summary.total);
-      console.log(processedResponse.data.summary.confirmedCasesIndian);
-      console.log(processedResponse.data.summary.confirmedCasesForeign);
-      console.log(processedResponse.data.summary.discharged);
-      console.log(processedResponse.data.summary.deaths);
+    promise
+        .then(function(response) {
+            const processingPromise = response.json();
+            return processingPromise;
+        })
+        .then(function(processedResponse) {
+            //   console.log(processedResponse);
+            //   console.log(processedResponse.data);
 
-      //State wise cases of CoVid
-      console.log(processedResponse.data.regional);
-      console.log(processedResponse.data.regional[0]);
-      console.log(processedResponse.data.regional[0].loc);
+            //   //Summary of cases in India
+            //   console.log(processedResponse.data.summary);
+            //   console.log(processedResponse.data.summary.total);
+            //   console.log(processedResponse.data.summary.confirmedCasesIndian);
+            //   console.log(processedResponse.data.summary.confirmedCasesForeign);
+            //   console.log(processedResponse.data.summary.discharged);
+            //   console.log(processedResponse.data.summary.deaths);
 
-      let p = document.createElement("p");
-      p.innerHTML = processedResponse.data.summary.total;
-      totalCases.appendChild(p);
+            //   //State wise cases of CoVid
+            //   console.log(processedResponse.data.regional);
+            //   console.log(processedResponse.data.regional[0]);
+            //   console.log(processedResponse.data.regional[0].loc);
 
-      p = document.createElement("p");
-      p.innerHTML = processedResponse.data.summary.discharged;
-      recovered.appendChild(p);
+            let p = document.createElement("p");
+            p.innerHTML = processedResponse.data.summary.total;
+            totalCases.appendChild(p);
 
-      p = document.createElement("p");
-      p.innerHTML = processedResponse.data.summary.deaths;
-      fatal.appendChild(p);
+            p = document.createElement("p");
+            p.innerHTML = processedResponse.data.summary.discharged;
+            recovered.appendChild(p);
 
-      p = document.createElement("p");
-      p.innerHTML = processedResponse.data.summary.confirmedCasesIndian;
-      confirmedCasesIndian.appendChild(p);
+            p = document.createElement("p");
+            p.innerHTML = processedResponse.data.summary.deaths;
+            fatal.appendChild(p);
 
-      p = document.createElement("p");
-      p.innerHTML = processedResponse.data.summary.confirmedCasesForeign;
-      confirmedCasesForeign.appendChild(p);
-    });
-  console.log("here");
+            p = document.createElement("p");
+            p.innerHTML = processedResponse.data.summary.confirmedCasesIndian;
+            confirmedCasesIndian.appendChild(p);
+
+            p = document.createElement("p");
+            p.innerHTML = processedResponse.data.summary.confirmedCasesForeign;
+            confirmedCasesForeign.appendChild(p);
+
+            //Generate table
+            const stateList = processedResponse.data.regional;
+            // console.log("length: ", stateList.length);
+
+            //Extract value for HTML header.
+            //("state", "Confirmed Cases Indian", "Confirmed Cases Foreign", "Discharged", "deaths")
+            var col = [];
+            for (var i = 0; i < stateList.length; i++) {
+                //   console.log(stateList[i].loc)
+                for (var key in stateList[i]) {
+                    if (col.indexOf(key) === -1) {
+                        // console.log(key);
+                        col.push(key);
+                    }
+                }
+            }
+
+            //CREATE DYNAMIC TABLE
+            var table = document.createElement("table");
+
+            //CREATE HTML TABLE HEARDER ROW USING THE EXTRACTED HEADERS ABOVE
+            var tr = table.insertRow(-1); //TABLE ROW
+
+            for (var i = 0; i < col.length; i++) {
+                var th = document.createElement("th");
+                th.innerHTML = col[i];
+                // console.log(col[i]);
+                tr.appendChild(th);
+            }
+
+            //ADD JSON DATA TO THE TABLE AS ROWS
+            for (var i = 0; i < stateList.length; i++) {
+                tr = table.insertRow(-1);
+
+                for (var j = 0; j < col.length; j++) {
+                    var tabCell = tr.insertCell(-1);
+                    tabCell.innerHTML = stateList[i][col[j]];
+                    console.log(stateList[i][col[j]]);
+                }
+            }
+
+            //FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+            
+        });
 }
