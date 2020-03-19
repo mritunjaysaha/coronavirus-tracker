@@ -1,37 +1,35 @@
 const URL = "https://covid.mathdro.id/api/countries/India";
 
-// const promise = fetch(URL);
+window.onload = addData;
 
-const totalCases = document.querySelector(".total-cases");
-promise
-  .then(function(response) {
-    const processingPromise = response.json();
-    return processingPromise;
-  })
-  .then(function(processedResponse) {
-    console.log(processedResponse);
-    console.log(processedResponse.confirmed);
-    console.log(processedResponse.recovered);
-    console.log(processedResponse.deaths);
-    console.log(processedResponse.lastUpdate);
-
-    //Sending the data to html
-    const tc = document.createElement("p");
-    tc.innerHTML = processedResponse.confirmed["value"];
-    console.log("tc: ", tc);
-    document.getElementById("TC").insertAdjacentHTML("beforebegin");
-  });
-
-  function addData(){
+function addData() {
+  const promise = fetch(URL);
+  const totalCases = document.getElementById("total-cases");
+  const recovered = document.getElementById("recovered");
+  const fatal = document.getElementById("fatal");
+  promise
+    .then(function(response) {
       const processingPromise = response.json();
-  }
-document.querySelector(".total-cases").addEventListener("onload", addData);
-// document.window.onload = addTC;
-// function addTC() {
-//   var newDiv = document.createElement("div");
-//   var newContent = document.createTextNode("hello");
-//   newDiv.appendChild(newContent);
+      return processingPromise;
+    })
+    .then(function(processedResponse) {
+      console.log(processedResponse);
+      console.log(processedResponse.confirmed);
+      console.log(processedResponse.recovered);
+      console.log(processedResponse.deaths);
+      console.log(processedResponse.lastUpdate);
 
-//   var currentDiv = document.getElementById("total-cases");
-//   document.body.insertBefore(newDiv, currentDiv);
-// }
+      let p = document.createElement("p");
+      p.innerHTML = processedResponse.confirmed.value;
+      totalCases.appendChild(p);
+
+      p = document.createElement("p");
+      p.innerHTML = processedResponse.recovered.value;
+      recovered.appendChild(p);
+
+      p = document.createElement("p");
+      p.innerHTML = processedResponse.deaths.value;
+      fatal.appendChild(p);
+    });
+  console.log("here");
+}
