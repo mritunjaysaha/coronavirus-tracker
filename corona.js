@@ -1,5 +1,5 @@
-const URL = "https://covid.mathdro.id/api/countries/India";
-
+// const URL = "https://covid.mathdro.id/api/countries/India";
+const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 window.onload = addData;
 
 function addData() {
@@ -14,22 +14,32 @@ function addData() {
     })
     .then(function(processedResponse) {
       console.log(processedResponse);
-      console.log(processedResponse.confirmed);
-      console.log(processedResponse.recovered);
-      console.log(processedResponse.deaths);
-      console.log(processedResponse.lastUpdate);
+      console.log(processedResponse.data);
 
-      let p = document.createElement("p");
-      p.innerHTML = processedResponse.confirmed.value;
-      totalCases.appendChild(p);
+      //Summary of cases in India
+      console.log(processedResponse.data.summary);
+      console.log(processedResponse.data.summary.total);
+      console.log(processedResponse.data.summary.confirmedCasesIndian);
+      console.log(processedResponse.data.summary.confirmedCasesForeign);
+      console.log(processedResponse.data.summary.discharged);
+      console.log(processedResponse.data.summary.deaths);
 
-      p = document.createElement("p");
-      p.innerHTML = processedResponse.recovered.value;
-      recovered.appendChild(p);
+      //State wise cases of CoVid
+      console.log(processedResponse.data.regional);
+      console.log(processedResponse.data.regional[0]);
+      console.log(processedResponse.data.regional[0].loc);
 
-      p = document.createElement("p");
-      p.innerHTML = processedResponse.deaths.value;
-      fatal.appendChild(p);
+      // let p = document.createElement("p");
+      // p.innerHTML = processedResponse.confirmed.value;
+      // totalCases.appendChild(p);
+
+      // p = document.createElement("p");
+      // p.innerHTML = processedResponse.recovered.value;
+      // recovered.appendChild(p);
+
+      // p = document.createElement("p");
+      // p.innerHTML = processedResponse.deaths.value;
+      // fatal.appendChild(p);
     });
   console.log("here");
 }
