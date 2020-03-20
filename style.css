@@ -27,7 +27,7 @@ th {
 }
 
 .padding {
-    padding-top: 1rem;
+    padding-top: 2rem;
     padding-bottom: 1rem;
 }
 .summary {
@@ -35,6 +35,8 @@ th {
     margin: 0;
     font-weight: bolder;
     text-align: center;
+    padding-top: 2rem;
+
 }
 .summary div p {
     font-size: 20px;
@@ -51,4 +53,8 @@ footer {
     display: block;
     align-items: center;
     padding: 0;
+}
+
+footer div p{
+    color: white;
 }

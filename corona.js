@@ -1,10 +1,9 @@
 // const URL = "https://covid.mathdro.id/api/countries/India";
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
-
+const URL1 = "https://api.rootnet.in/covid19-in/contacts";
 window.onload = addData;
 
 function addData() {
-    console.log("here");
     const promise = fetch(URL);
     const totalCases = document.getElementById("total-cases");
     const recovered = document.getElementById("recovered");
@@ -77,7 +76,7 @@ function addData() {
                     }
                 }
             }
-            console.log(colHeader);
+            // console.log(colHeader);
             //CREATE DYNAMIC TABLE
             var table = document.createElement("table");
 
@@ -106,5 +105,17 @@ function addData() {
             var divContainer = document.getElementById("show-data");
             divContainer.innerHTML = "";
             divContainer.appendChild(table);
+        });
+}
+
+function addHelpline() {
+    const promise = fetch(URL1);
+
+    promise
+        .then(function(response) {
+            const processingPromise = response.json();
+        })
+        .then(function(processedResponse) {
+            console.log(processedResponse);
         });
 }
