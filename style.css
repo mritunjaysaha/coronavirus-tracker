@@ -1,22 +1,17 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
-
-*{
-overflow-x: hidden;
-}
-body {
+* {
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     scroll-behavior: smooth;
-    font-family: "Montserrat", sans-serif;
 }
+
 th,
 td,
 p {
     font-family: monospace;
 }
-
 
 table,
 th,
@@ -31,18 +26,17 @@ th {
     font-weight: bold;
 }
 
-.padding{
+.padding {
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 .summary {
     height: max-content;
     margin: 0;
-    /* display: flex;
-    flex-direction: column; */
+    font-weight: bolder;
     text-align: center;
 }
-.summary  div  p {
+.summary div p {
     font-size: 20px;
 }
 .footerWrapper {
@@ -53,7 +47,7 @@ th {
     align-content: center;
 }
 
-footer{
+footer {
     display: block;
     align-items: center;
     padding: 0;
