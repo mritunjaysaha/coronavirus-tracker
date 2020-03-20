@@ -2,7 +2,7 @@
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
 window.onload = addData;
-
+window.onload = addHelpline;
 function addData() {
     const promise = fetch(URL);
     const totalCases = document.getElementById("total-cases");

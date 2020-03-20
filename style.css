@@ -6,7 +6,17 @@
     text-decoration: none;
     scroll-behavior: smooth;
 }
+/* For Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 th,
 td,
 p {
@@ -36,7 +46,6 @@ th {
     font-weight: bolder;
     text-align: center;
     padding-top: 2rem;
-
 }
 .summary div p {
     font-size: 20px;
@@ -55,6 +64,6 @@ footer {
     padding: 0;
 }
 
-footer div p{
+footer div p {
     color: white;
 }
