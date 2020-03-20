@@ -15,21 +15,20 @@ p {
     font-family: monospace;
 }
 
-#show-data {
-
-}
 
 table,
 th,
 td {
-    border: solid 1px #ddd;
     border-collapse: collapse;
     padding: 2px 3px;
     text-align: center;
+    margin: auto;
 }
 th {
     font-weight: bold;
+    background-color: #555;
 }
+
 
 .summary {
     height: max-content;
