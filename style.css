@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
 
 /* #2a6226 #282a6d #78292d #842a2e #902b30  */
+* {
+    overflow-x: hidden;
+}
 body {
     margin: 0;
     padding: 0;
@@ -8,13 +11,12 @@ body {
     text-decoration: none;
     scroll-behavior: smooth;
     font-family: "Montserrat", sans-serif;
+<<<<<<< HEAD
+    overflow-x: hidden;
 }
-th,
-td,
-p {
-    font-family: monospace;
-}
+=======
 
+>>>>>>> 490f2dcede725aa30ca277d3fbea407db9231351
 
 table,
 th,
@@ -23,23 +25,40 @@ td {
     padding: 2px 3px;
     text-align: center;
     margin: auto;
+<<<<<<< HEAD
+    font-size: 16px;
+=======
+>>>>>>> 490f2dcede725aa30ca277d3fbea407db9231351
 }
 th {
     font-weight: bold;
     background-color: #555;
 }
 
+<<<<<<< HEAD
+.summary-flex {
+=======
 
-.summary {
+/* .summary {
     height: max-content;
     margin: 0;
     background-color: black;
-    color: #ddd;
+    color: #ddd; */
+>>>>>>> 490f2dcede725aa30ca277d3fbea407db9231351
     display: flex;
     flex-direction: column;
+}
+
+.summary-table {
+    height: max-content;
+    margin: 0;
+    /* background-color: black; */
+    /* color: #ddd; */
+    /* display: flex;
+    flex-direction: column; */
     text-align: center;
 }
-.summary > div > p {
+.summary-table div p {
     font-size: 20px;
 }
 .footerWrapper {
@@ -51,8 +70,17 @@ th {
     align-content: center;
 }
 
-footer{
+footer {
     display: block;
     align-items: center;
     padding: 0;
+}
+
+@media screen and (max-width: 576px) {
+    table,
+    th,
+    td {
+        font-size: 12px;
+        overflow-x: hidden;
+    }
 }
