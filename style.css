@@ -1,14 +1,3 @@
-/* For Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* For Firefox */
-input[type="number"] {
-    -moz-appearance: textfield;
-}
 * {
     overflow-x: hidden;
     margin: 0;
@@ -27,18 +16,25 @@ p {
 table,
 th,
 td {
-    border: solid 1px #ddd;
     border-collapse: collapse;
-    padding: 2px 3px;
+    padding: 10px 4px;
     text-align: center;
     margin: auto;
 }
 th {
     font-weight: bold;
+    background-color: #009879;
+    color: #ffffff;
+}
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
 }
 
 .padding {
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
 }
 .summary {
@@ -48,6 +44,7 @@ th {
     text-align: center;
     padding-top: 2rem;
 }
+
 .summary div p {
     font-size: 20px;
 }
@@ -68,3 +65,4 @@ footer {
 footer div p {
     color: white;
 }
+

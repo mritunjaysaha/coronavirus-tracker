@@ -14,7 +14,7 @@
 
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <nav  class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <nav class="navbar navbar-light bg-light">
             <span class="navbar-brand mb-0 h1">COVID: India Stats</span>
         </nav>
@@ -26,15 +26,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#summary-total">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" target="_blank" href="https://www.mohfw.gov.in/">MoHFW Government Website</a>
-
                 </li>
-
-
-
+                <li class="nav-item active">
+                    <a class="nav-link"  href="#table-state-data">State-wise Stat</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#helpline">Helpline</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,12 +52,8 @@
             </ul>
         </div>
     </nav>
-    <!-- <div id="header">
-        <h1>COVID: India Stats</h1>
-    </div> -->
-
     <!-- Summary of Cases -->
-    <div id="summary">
+    <div id="summary-total">
         <div class="summary row">
             <div id="total-cases" class="col-lg-6">
                 <h4>Total</h4>
@@ -63,21 +61,30 @@
             <div id="confirmed-india" class="col-lg-6">
                 <h4>Confirmed Cases Indian</h4>
             </div>
-            <div id="confirmed-foreign" class="col-lg-6">
+            <div id="confirmed-foreign" class="col-lg-4">
                 <h4>Confirmed Cases Foreign</h4>
             </div>
-            <div id="recovered" class="col-lg-6">
+            <div id="recovered" class="col-lg-4">
                 <h4>Recovered</h4>
             </div>
-            <div id="fatal" class="col-lg-12">
+            <div id="fatal" class="col-lg-4">
                 <h4>Fatal</h4>
             </div>
         </div>
-        <!-- Details state wise -->
-        <!-- <h3>State-wise Stats</h3> -->
+    </div>
+    <!-- Details state wise -->
+    <hr>
+    <div id="table-state-data">
+        <h3 class="text-center padding">State-wise Stats</h3>
         <div id="show-data">
 
         </div>
+    </div>
+    <!-- <hr> -->
+    <!-- HELPLINE  -->
+    <div id="helpline" class="padding">
+        <h3 class="text-center padding">Helpline</h3>
+        <div id="helpline-data"></div>
     </div>
 
     <footer>
@@ -93,7 +100,6 @@
         </div>
     </footer>
 
-    <script src="https://kit.fontawesome.com/5c77b9e253.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

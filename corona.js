@@ -1,6 +1,7 @@
 // const URL = "https://covid.mathdro.id/api/countries/India";
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
+const URL2 = "https://api.rootnet.in/covid19-in/stats/hospitals";
 window.onload = addData;
 // window.onload = addHelpline;
 
@@ -108,18 +109,63 @@ function addData() {
             divContainer.appendChild(table);
         });
 
-    // addHelpline();
+    addHelpline();
 }
 
-// function addHelpline() {
-//     const promise = fetch(URL1);
+function addHelpline() {
+    const promise = fetch(URL1);
 
-//     promise
-//         .then(function(response) {
-//             const processingPromise = response.json();
-//             return processingPromise;
-//         })
-//         .then(function(processedResponse) {
-//             console.log(processedResponse);
-//         });
-// }
+    promise
+        .then(function(response) {
+            const processingPromise = response.json();
+            return processingPromise;
+        })
+        .then(function(processedResponse) {
+            // console.log(processedResponse);
+            // console.log(processedResponse.data);
+            // console.log(processedResponse.data.contacts);
+            // console.log(processedResponse.data.contacts.primary);
+            // console.log(processedResponse.data.contacts.regional);
+
+            //Generate table
+            const hospitalList = processedResponse.data.contacts.regional;
+            // console.log(hospitalList);
+
+            var col = [];
+            for (var i = 0; i < hospitalList.length; i++) {
+                // console.log(hospitalList[i].loc)
+                for (var key in hospitalList[i]) {
+                    if (col.indexOf(key) === -1) {
+                        col.push(key);
+                    }
+                }
+            }
+            // console.log(col);
+
+            //create dynamic table
+            var table = document.createElement("table");
+
+            var tr = table.insertRow(-1);
+
+            const colHeader = ["State", "Number"];
+            for (var i = 0; i < col.length; i++) {
+                var th = document.createElement("th");
+                th.innerHTML = colHeader[i];
+                tr.appendChild(th);
+            }
+
+            //Add json data to the table rows
+            for (var i = 0; i < hospitalList.length; i++) {
+                tr = table.insertRow(-1);
+
+                for (var j = 0; j < col.length; j++) {
+                    var tabCell = tr.insertCell(-1);
+                    tabCell.innerHTML = hospitalList[i][col[j]];
+                }
+
+                var divContainer = document.getElementById("helpline-data");
+                divContainer.innerHTML = "";
+                divContainer.appendChild(table);
+            }
+        });
+}
