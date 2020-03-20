@@ -2,7 +2,8 @@
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
 window.onload = addData;
-window.onload = addHelpline;
+// window.onload = addHelpline;
+
 function addData() {
     const promise = fetch(URL);
     const totalCases = document.getElementById("total-cases");
@@ -106,16 +107,19 @@ function addData() {
             divContainer.innerHTML = "";
             divContainer.appendChild(table);
         });
+
+    // addHelpline();
 }
 
-function addHelpline() {
-    const promise = fetch(URL1);
+// function addHelpline() {
+//     const promise = fetch(URL1);
 
-    promise
-        .then(function(response) {
-            const processingPromise = response.json();
-        })
-        .then(function(processedResponse) {
-            console.log(processedResponse);
-        });
-}
+//     promise
+//         .then(function(response) {
+//             const processingPromise = response.json();
+//             return processingPromise;
+//         })
+//         .then(function(processedResponse) {
+//             console.log(processedResponse);
+//         });
+// }
