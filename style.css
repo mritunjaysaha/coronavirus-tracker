@@ -46,14 +46,14 @@ th {
 .footerWrapper {
     margin: 0;
     background-color: #555;
-    display: flex;
-    height: max-content;
-    padding-top: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    position: relative;
+    align-content: center;
 }
 
-.footerSocial > p{
+footer{
     display: block;
-    margin: auto;
-    text-align: center;
-    text-justify: center;
+    align-items: center;
+    padding: 0;
 }
