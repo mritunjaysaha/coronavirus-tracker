@@ -66,3 +66,22 @@ footer div p {
     color: white;
 }
 
+h4 {
+    overflow: hidden;
+}
+/* 
+table {
+    --width: 400px;
+    --height: 900px;
+    width: var(--width);
+    height: var(--height);
+}
+
+@media only screen and (min-width: 600px) {
+    table,
+    tbody {
+        --width: 200px;
+        --height: 900px;
+        width: 200px;
+    }
+} */
