@@ -1,9 +1,7 @@
-// const URL = "https://covid.mathdro.id/api/countries/India";
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
 const URL2 = "https://api.rootnet.in/covid19-in/stats/hospitals";
 window.onload = addData;
-// window.onload = addHelpline;
 
 function addData() {
     const promise = fetch(URL);
@@ -19,22 +17,6 @@ function addData() {
             return processingPromise;
         })
         .then(function(processedResponse) {
-            //   console.log(processedResponse);
-            //   console.log(processedResponse.data);
-
-            //   //Summary of cases in India
-            //   console.log(processedResponse.data.summary);
-            //   console.log(processedResponse.data.summary.total);
-            //   console.log(processedResponse.data.summary.confirmedCasesIndian);
-            //   console.log(processedResponse.data.summary.confirmedCasesForeign);
-            //   console.log(processedResponse.data.summary.discharged);
-            //   console.log(processedResponse.data.summary.deaths);
-
-            //   //State wise cases of CoVid
-            //   console.log(processedResponse.data.regional);
-            //   console.log(processedResponse.data.regional[0]);
-            //   console.log(processedResponse.data.regional[0].loc);
-
             let p = document.createElement("p");
             p.innerHTML = processedResponse.data.summary.total;
             totalCases.appendChild(p);
@@ -57,10 +39,8 @@ function addData() {
 
             //Generate table
             const stateList = processedResponse.data.regional;
-            // console.log("length: ", stateList.length);
 
             //Extract value for HTML header.
-            //("state", "Confirmed Cases Indian", "Confirmed Cases Foreign", "Discharged", "deaths")
             var colHeader = [
                 "State",
                 "Indian",
@@ -70,15 +50,12 @@ function addData() {
             ];
             var col = [];
             for (var i = 0; i < stateList.length; i++) {
-                //   console.log(stateList[i].loc)
                 for (var key in stateList[i]) {
                     if (col.indexOf(key) === -1) {
-                        // console.log(key);
                         col.push(key);
                     }
                 }
             }
-            // console.log(colHeader);
             //CREATE DYNAMIC TABLE
             var table = document.createElement("table");
 
@@ -88,7 +65,6 @@ function addData() {
             for (var i = 0; i < col.length; i++) {
                 var th = document.createElement("th");
                 th.innerHTML = colHeader[i];
-                // console.log(col[i]);
                 tr.appendChild(th);
             }
 
@@ -99,7 +75,6 @@ function addData() {
                 for (var j = 0; j < col.length; j++) {
                     var tabCell = tr.insertCell(-1);
                     tabCell.innerHTML = stateList[i][col[j]];
-                    // console.log(stateList[i][col[j]]);
                 }
             }
 
@@ -121,26 +96,18 @@ function addHelpline() {
             return processingPromise;
         })
         .then(function(processedResponse) {
-            // console.log(processedResponse);
-            // console.log(processedResponse.data);
-            // console.log(processedResponse.data.contacts);
-            // console.log(processedResponse.data.contacts.primary);
-            // console.log(processedResponse.data.contacts.regional);
 
             //Generate table
             const hospitalList = processedResponse.data.contacts.regional;
-            // console.log(hospitalList);
 
             var col = [];
             for (var i = 0; i < hospitalList.length; i++) {
-                // console.log(hospitalList[i].loc)
                 for (var key in hospitalList[i]) {
                     if (col.indexOf(key) === -1) {
                         col.push(key);
                     }
                 }
             }
-            // console.log(col);
 
             //create dynamic table
             var table = document.createElement("table");

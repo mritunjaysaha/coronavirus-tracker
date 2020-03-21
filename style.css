@@ -1,10 +1,10 @@
 * {
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 th,
@@ -13,6 +13,12 @@ p {
     font-family: monospace;
 }
 
+table {
+    font-size: 0.9rem;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 table,
 th,
 td {
@@ -20,6 +26,7 @@ td {
     padding: 10px 4px;
     text-align: center;
     margin: auto;
+    overflow-x: hidden;
 }
 th {
     font-weight: bold;
@@ -40,7 +47,7 @@ tbody tr:last-of-type {
 .summary {
     height: max-content;
     margin: 0;
-    font-weight: bolder;
+    font-weight: bold;
     text-align: center;
     padding-top: 2rem;
 }
@@ -69,19 +76,34 @@ footer div p {
 h4 {
     overflow: hidden;
 }
-/* 
-table {
-    --width: 400px;
-    --height: 900px;
-    width: var(--width);
-    height: var(--height);
+hr {
+    width: 95%;
+    background-color: #555;
+    margin: auto;
+}
+#health-advisory {
+    display: block;
+    margin: auto;
+    width: 90%;
+    text-align: left;
+}
+table,
+tbody {
+    width: 95%;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
     table,
-    tbody {
-        --width: 200px;
-        --height: 900px;
-        width: 200px;
+    tbody,
+    hr {
+        width: 90%;
     }
-} */
+}
+
+@media only screen and (min-width: 959px) {
+    table,
+    tbody,
+    hr {
+        width: 90%;
+    }
+}
