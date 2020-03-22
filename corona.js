@@ -42,7 +42,7 @@ function addData() {
 
             //Extract value for HTML header.
             var colHeader = [
-                "State",
+                "State/UT",
                 "Indian",
                 "Foreigner",
                 "Recovered",
