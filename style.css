@@ -99,11 +99,3 @@ tbody {
         width: 90%;
     }
 }
-
-@media only screen and (min-width: 959px) {
-    table,
-    tbody,
-    hr {
-        width: 90%;
-    }
-}
