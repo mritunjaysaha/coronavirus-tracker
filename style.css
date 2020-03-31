@@ -92,10 +92,40 @@ tbody {
     width: 95%;
 }
 
+.navbar-collapse {
+    float: right;
+    margin-right: 20px;
+}
+nav {
+    height: 60px;
+    overflow: hidden;
+}
+.navbar-brand {
+    font-size: 24px;
+ }
+.navbar-nav {
+    display: flex;
+}
+.navbar-nav li {
+    font-size: 12px;
+ 
+    padding: 0 15px;
+    align-items: flex-end;
+    line-height: 60px;
+}
+.navbar-nav li:hover {
+    background-color: rgba(61, 60, 60, 0.055);
+}
+
+
 @media only screen and (min-width: 768px) {
     table,
     tbody,
     hr {
         width: 90%;
     }
+
+    #helpful-links{
+        width: 90%;
+    
 }
