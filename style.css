@@ -86,6 +86,7 @@ hr {
     margin: auto;
     width: 90%;
     text-align: left;
+    padding-bottom: 1rem;
 }
 table,
 tbody {
@@ -103,12 +104,18 @@ tbody {
     margin-right:15px;
 }
 .navbar-nav li a:hover{
-    /* font-size: 16px; */
     font-weight: bold;
     transition: ease-in 0.1s;
 }
 
-
+.footerWrapper a{
+    color: #f3f3f3;
+    text-decoration: underline;
+}
+.link a{
+    color: #000;
+    text-decoration: underline;
+}
 @media only screen and (min-width: 768px) {
     table,
     tbody,
@@ -118,5 +125,5 @@ tbody {
 
     #helpful-links{
         width: 90%;
-    
+    }
 }
