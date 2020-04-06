@@ -45,11 +45,16 @@ tbody tr:last-of-type {
     padding-bottom: 1rem;
 }
 .summary {
-    height: max-content;
-    margin: 0;
-    font-weight: bold;
-    text-align: center;
+    margin: 0 auto;
     padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.summary div h4{
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .summary div p {
@@ -125,5 +130,10 @@ tbody {
 
     #helpful-links{
         width: 90%;
+    }
+
+    .summary{
+        flex-direction: row;
+        padding: 3rem 0 1rem 0;
     }
 }
