@@ -1,6 +1,5 @@
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
-const URL2 = "https://api.rootnet.in/covid19-in/stats/hospitals";
 window.onload = addData;
 
 function addData() {
@@ -46,7 +45,8 @@ function addData() {
                 "Indian",
                 "Foreigner",
                 "Recovered",
-                "Fatal"
+                "Fatal",
+                "Total confirmed"
             ];
             var col = [];
             for (var i = 0; i < stateList.length; i++) {

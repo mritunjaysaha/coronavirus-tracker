@@ -48,7 +48,8 @@ tbody tr:last-of-type {
     margin: 0 auto;
     padding-top: 2rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    padding: 3rem 0 0 0;
     justify-content: space-evenly;
     text-align: center;
 }
@@ -82,7 +83,7 @@ h4 {
     overflow: hidden;
 }
 hr {
-    width: 95%;
+    width: 90%;
     background-color: #555;
     margin: auto;
 }
@@ -95,7 +96,7 @@ hr {
 }
 table,
 tbody {
-    width: 95%;
+    width: 90%;
 }
 
 .navbar-brand {
@@ -121,19 +122,24 @@ tbody {
     color: #000;
     text-decoration: underline;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     table,
     tbody,
     hr {
-        width: 90%;
+        width: 95%;
     }
 
     #helpful-links{
-        width: 90%;
+        width: 95%;
     }
 
     .summary{
-        flex-direction: row;
+        flex-direction: column;
         padding: 3rem 0 1rem 0;
     }
+    
+    tr th:nth-child(6),tr td:nth-child(6){
+
+        display:none;
+      }
 }
