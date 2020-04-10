@@ -141,29 +141,23 @@ function addHelpline() {
 function addNewCases() {
     const promise = fetch(URL2);
     const totalCasesData = [];
-    const totalCasesDate = [];
+    let totalCasesDate = [];
+    const dailyIncrease = [];
     promise
         .then(function (response) {
             const processingPromise = response.json();
             return processingPromise;
         })
         .then(function (processedResponse) {
-            // console.log(processedResponse)
-            // console.log(processedResponse.data);
-            // console.log(processedResponse.data[0].summary.total);
-            // console.log(typeof processedResponse.data[0].summary.total);
-            // console.log(processedResponse.data[0].day);
-            // console.log(typeof(processedResponse.data[0].day))
-            // console.log(processedResponse.data.length)
-            // for (let i = 0; i < processedResponse.data.length; i++) {
-            //     console.log(
-            //         `day[${i}]: ${processedResponse.data[i].summary.total}`
-            //     );
-            // }
+            console.log(processedResponse);
 
-            for (let i = 1; i < processedResponse.data.length; i++) {
-                let total = processedResponse.data[i].summary.total;
-                let date = processedResponse.data[i].day;
+            //Total number of days
+            const days = processedResponse.data.length;
+            //To extract the data for the chart of total cases
+            let total, date;
+            for (let i = 0; i < days; i++) {
+                total = processedResponse.data[i].summary.total;
+                date = processedResponse.data[i].day;
 
                 // console.log(`${date}: ${total}`)
 
@@ -171,25 +165,43 @@ function addNewCases() {
                 totalCasesDate.push(date);
             }
 
-            // console.log(typeof totalCasesData);
-            // console.log(typeof totalCasesDate);
+            //Format date
+            totalCasesDate = formatDate(totalCasesDate);
 
-            makeChart(totalCasesDate, totalCasesData);
+            makeChartTotal(totalCasesDate, totalCasesData);
+
+            //To extract the data for the chart of daily increase in cases
+            let cases;
+            dailyIncrease.push(0);
+            for (let i = 1; i < days; i++) {
+                cases =
+                    processedResponse.data[i].summary.total -
+                    processedResponse.data[i - 1].summary.total;
+
+                dailyIncrease.push(cases);
+            }
+            makeChartDailyIncrease(dailyIncrease, totalCasesDate);
         });
 }
+function formatDate(dateArray) {
+    for (let i = 0; i < dateArray.length; i++) {
+        str = dateArray[i].slice(5);
+        dateArray[i] = str;
+        console.log(dateArray[i]);
+    }
+    return dateArray;
+}
 
-function makeChart(dateArray, dataArray) {
-    let myChart = document.getElementById("chartTotal").getContext("2d");
+function makeChartTotal(dateArray, dataArray) {
+    let myChart = document.getElementById("chartTotal");
 
-    //Global options
-    // Chart.defaults.global.defaltFontFamily: 'Lato ';
     let chart = new Chart(myChart, {
         type: "line",
         data: {
             labels: dateArray,
             datasets: [
                 {
-                    label: "date",
+                    label: "Total cases",
                     data: dataArray,
                     backgroundColor: "red",
                 },
@@ -210,6 +222,47 @@ function makeChart(dateArray, dataArray) {
             title: {
                 display: true,
                 text: "Total cases",
+                fontSize: 20,
+            },
+            legend: {
+                position: "bottom",
+                labels: {
+                    fontColor: "#000",
+                },
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
+                },
+            },
+            tooltips: {
+                enabled: true,
+            },
+        },
+    });
+}
+
+function makeChartDailyIncrease(dataArray, dateArray) {
+    let myChart = document.getElementById("chartDailyIncrease");
+    let chart = new Chart(myChart, {
+        type: "bar",
+        data: {
+            labels: dateArray,
+            datasets: [
+                {
+                    label: "Daily Increase",
+                    data: dataArray,
+                    backgroundColor: "red",
+                },
+            ],
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Daily Increase in Cases",
                 fontSize: 20,
             },
             legend: {
