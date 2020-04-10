@@ -1,5 +1,6 @@
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
+const URL2 = "https://api.rootnet.in/covid19-in/stats/history";
 window.onload = addData;
 
 function addData() {
@@ -11,11 +12,11 @@ function addData() {
     const confirmedCasesForeign = document.getElementById("confirmed-foreign");
 
     promise
-        .then(function(response) {
+        .then(function (response) {
             const processingPromise = response.json();
             return processingPromise;
         })
-        .then(function(processedResponse) {
+        .then(function (processedResponse) {
             let p = document.createElement("p");
             p.innerHTML = processedResponse.data.summary.total;
             totalCases.appendChild(p);
@@ -39,14 +40,14 @@ function addData() {
             //Generate table
             const stateList = processedResponse.data.regional;
 
-            //Extract value for HTML header.
+            //values for HTML header.
             var colHeader = [
                 "State/UT",
                 "Indian",
                 "Foreigner",
                 "Recovered",
                 "Fatal",
-                "Total confirmed"
+                "Total confirmed",
             ];
             var col = [];
             for (var i = 0; i < stateList.length; i++) {
@@ -85,18 +86,18 @@ function addData() {
         });
 
     addHelpline();
+    addNewCases();
 }
 
 function addHelpline() {
     const promise = fetch(URL1);
 
     promise
-        .then(function(response) {
+        .then(function (response) {
             const processingPromise = response.json();
             return processingPromise;
         })
-        .then(function(processedResponse) {
-
+        .then(function (processedResponse) {
             //Generate table
             const hospitalList = processedResponse.data.contacts.regional;
 
@@ -135,4 +136,99 @@ function addHelpline() {
                 divContainer.appendChild(table);
             }
         });
+}
+
+function addNewCases() {
+    const promise = fetch(URL2);
+    const totalCasesData = [];
+    const totalCasesDate = [];
+    promise
+        .then(function (response) {
+            const processingPromise = response.json();
+            return processingPromise;
+        })
+        .then(function (processedResponse) {
+            // console.log(processedResponse)
+            // console.log(processedResponse.data);
+            // console.log(processedResponse.data[0].summary.total);
+            // console.log(typeof processedResponse.data[0].summary.total);
+            // console.log(processedResponse.data[0].day);
+            // console.log(typeof(processedResponse.data[0].day))
+            // console.log(processedResponse.data.length)
+            // for (let i = 0; i < processedResponse.data.length; i++) {
+            //     console.log(
+            //         `day[${i}]: ${processedResponse.data[i].summary.total}`
+            //     );
+            // }
+
+            for (let i = 1; i < processedResponse.data.length; i++) {
+                let total = processedResponse.data[i].summary.total;
+                let date = processedResponse.data[i].day;
+
+                // console.log(`${date}: ${total}`)
+
+                totalCasesData.push(total);
+                totalCasesDate.push(date);
+            }
+
+            // console.log(typeof totalCasesData);
+            // console.log(typeof totalCasesDate);
+
+            makeChart(totalCasesDate, totalCasesData);
+        });
+}
+
+function makeChart(dateArray, dataArray) {
+    let myChart = document.getElementById("chartTotal").getContext("2d");
+
+    //Global options
+    // Chart.defaults.global.defaltFontFamily: 'Lato ';
+    let chart = new Chart(myChart, {
+        type: "line",
+        data: {
+            labels: dateArray,
+            datasets: [
+                {
+                    label: "date",
+                    data: dataArray,
+                    backgroundColor: "red",
+                },
+            ],
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            callback: function (label, index, labels) {
+                                return label / 1000 + "k";
+                            },
+                        },
+                    },
+                ],
+            },
+            title: {
+                display: true,
+                text: "Total cases",
+                fontSize: 20,
+            },
+            legend: {
+                position: "bottom",
+                labels: {
+                    fontColor: "#000",
+                },
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
+                },
+            },
+            tooltips: {
+                enabled: true,
+            },
+        },
+    });
 }

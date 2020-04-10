@@ -87,7 +87,7 @@ hr {
     background-color: #555;
     margin: auto;
 }
-#health-advisory {
+#helpful-links {
     display: block;
     margin: auto;
     width: 90%;
@@ -121,6 +121,18 @@ tbody {
 .link a{
     color: #000;
     text-decoration: underline;
+}
+#trends{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* width: 90%; */
+}
+
+#chartTotal{
+    background-color: #ffe0e6;
+    border-radius: 5px;
+    padding: 1rem;
 }
 @media only screen and (max-width: 768px) {
     table,
