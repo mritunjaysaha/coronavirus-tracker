@@ -225,6 +225,7 @@ function makeChartTotal(dateArray, dataArray) {
                 fontSize: 20,
             },
             legend: {
+                display: false,
                 position: "bottom",
                 labels: {
                     fontColor: "#000",
@@ -266,6 +267,7 @@ function makeChartDailyIncrease(dataArray, dateArray) {
                 fontSize: 20,
             },
             legend: {
+                display: false,
                 position: "bottom",
                 labels: {
                     fontColor: "#000",
