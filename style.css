@@ -129,11 +129,11 @@ tbody {
     margin: 0 auto;
     width: 90%;
 }
-canvas {
+/* canvas {
     background-color: #ffe0e6;
     border-radius: 10px;
     padding: 1rem;
-}
+} */
 
 @media only screen and (max-width: 768px) {
     table,

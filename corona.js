@@ -146,12 +146,13 @@ function addNewCases() {
     const recoveredEveryday = [];
 
     const chartElements = {
-        chartId: "chartTotal",
-        title: "Total Cases",
+        chartId: "",
+        title: "",
         dataArray: [],
         dateArray: [],
-        backgroundColor: "red",
+        backgroundColor: "",
         legendDisplay: false,
+        type: "",
     };
     promise
         .then(function (response) {
@@ -175,11 +176,19 @@ function addNewCases() {
             //Format date
             arrCasesDate = formatDate(arrCasesDate);
 
-            // makeChartTotal(totalCasesDate, totalCasesData);
-            chartElements.dataArray = totalCasesData;
             chartElements.dateArray = arrCasesDate;
+
+            updateElements(
+                chartElements,
+                "confirmedCasesCumulative",
+                "Confirmed Cases",
+                totalCasesData,
+                "red",
+                "line"
+            );
             console.log(chartElements);
             makeChart(chartElements);
+
             //To extract the data for the chart of daily increase in cases
             let cases;
             dailyIncrease.push(0);
@@ -190,16 +199,32 @@ function addNewCases() {
 
                 dailyIncrease.push(cases);
             }
-            // makeChartDailyIncrease(dailyIncrease, totalCasesDate);
+            updateElements(
+                chartElements,
+                "confirmedIncreaseDaily",
+                "COnfirmed Cases",
+                dailyIncrease,
+                "red",
+                "bar"
+            );
+            makeChart(chartElements);
 
             //Recovered Everyday
             let reovered;
             for (let i = 0; i < days; i++) {
                 reovered = processedResponse.data[i].summary.discharged;
-                // console.log(reovered);
                 recoveredEveryday.push(reovered);
             }
             // TODO: make chart
+            updateElements(
+                chartElements,
+                "recoveredCumulative",
+                "Recovered",
+                recoveredEveryday,
+                "green",
+                "line"
+            );
+            makeChart(chartElements);
 
             // Daily increase in recovered cases
             let recoveredDaily;
@@ -209,10 +234,18 @@ function addNewCases() {
                 recoveredDaily =
                     processedResponse.data[i].summary.discharged -
                     processedResponse.data[i - 1].summary.discharged;
-                // console.log(recoveredDaily);
                 recoveredEverydayInc.push(recoveredDaily);
             }
             //TODO: make chart
+            updateElements(
+                chartElements,
+                "recoveredDaily",
+                "Recovered",
+                recoveredEverydayInc,
+                "green",
+                "bar"
+            );
+            makeChart(chartElements);
 
             //Deaths everyday
             let deaths;
@@ -222,7 +255,15 @@ function addNewCases() {
                 // console.log(deaths);
                 deathsEveryday.push(deaths);
             }
-
+            updateElements(
+                chartElements,
+                "deathsCumulative",
+                "Deceased",
+                deathsEveryday,
+                "grey",
+                "line"
+            );
+            makeChart(chartElements);
             // TODO: make chart
 
             //Daily increase in deaths
@@ -237,6 +278,15 @@ function addNewCases() {
                 deathsEverydayInc.push(deaths);
             }
             // TODO: make chart
+            updateElements(
+                chartElements,
+                "deathsDaily",
+                "Deceased",
+                deathsEverydayInc,
+                "grey",
+                "bar"
+            );
+            makeChart(chartElements);
         });
 }
 function formatDate(dateArray) {
@@ -247,107 +297,19 @@ function formatDate(dateArray) {
     return dateArray;
 }
 
-function makeChartTotal(dateArray, dataArray) {
-    let myChart = document.getElementById("chartTotal");
-
-    let chart = new Chart(myChart, {
-        type: "line",
-        data: {
-            labels: dateArray,
-            datasets: [
-                {
-                    label: "Total cases",
-                    data: dataArray,
-                    backgroundColor: "red",
-                },
-            ],
-        },
-        options: {
-            scales: {
-                yAxes: [
-                    {
-                        ticks: {
-                            callback: function (label, index, labels) {
-                                return label / 1000 + "k";
-                            },
-                        },
-                    },
-                ],
-            },
-            title: {
-                display: true,
-                text: "Total cases",
-                fontSize: 20,
-            },
-            legend: {
-                display: false,
-                position: "bottom",
-                labels: {
-                    fontColor: "#000",
-                },
-            },
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    top: 0,
-                },
-            },
-            tooltips: {
-                enabled: true,
-            },
-        },
-    });
-}
-
-function makeChartDailyIncrease(dataArray, dateArray) {
-    let myChart = document.getElementById("chartDailyIncrease");
-    let chart = new Chart(myChart, {
-        type: "bar",
-        data: {
-            labels: dateArray,
-            datasets: [
-                {
-                    label: "Daily Increase",
-                    data: dataArray,
-                    backgroundColor: "red",
-                },
-            ],
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Daily Increase in Cases",
-                fontSize: 20,
-            },
-            legend: {
-                display: false,
-                position: "bottom",
-                labels: {
-                    fontColor: "#000",
-                },
-            },
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    top: 0,
-                },
-            },
-            tooltips: {
-                enabled: true,
-            },
-        },
-    });
+function updateElements(dataObject, id, title, array, color, chartType) {
+    dataObject.chartId = id;
+    dataObject.dataArray = array;
+    dataObject.backgroundColor = color;
+    dataObject.type = chartType;
+    dataObject.title = title;
 }
 
 function makeChart(elements) {
     let myChart = document.getElementById(`${elements.chartId}`);
 
     let chart = new Chart(myChart, {
-        type: "line",
+        type: elements.type,
         data: {
             labels: elements.dateArray,
             datasets: [
