@@ -200,4 +200,10 @@ tbody {
         width: 100%;
         margin: 0 auto;
     }
+
+    canvas{
+        width: 200;
+        height: 200;
+    }
+
 }

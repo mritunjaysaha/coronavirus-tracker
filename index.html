@@ -95,14 +95,14 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="cumulative" role="tabpanel" aria-labelledby="cumulative-tab">
-                    <canvas class="padding canvasred" id="confirmedCasesCumulative"></canvas>
-                    <canvas class="padding canvasgreen" id="recoveredCumulative"></canvas>
-                    <canvas class="padding canvasgrey" id="deathsCumulative"></canvas>
+                    <canvas height="100" width="150" class="padding canvasred" id="confirmedCasesCumulative"></canvas>
+                    <canvas height="100" width="150" class="padding canvasgreen" id="recoveredCumulative"></canvas>
+                    <canvas height="100" width="150" class="padding canvasgrey" id="deathsCumulative"></canvas>
                 </div>
                 <div class="tab-pane fade" id="daily" role="tabpanel" aria-labelledby="daily-tab">
-                    <canvas class="padding canvasred" id="confirmedIncreaseDaily"></canvas>
-                    <canvas class="padding canvasgreen" id="recoveredDaily"></canvas>
-                    <canvas class="padding canvasgrey" id="deathsDaily"></canvas>
+                    <canvas height="100" width="150" class="padding canvasred" id="confirmedIncreaseDaily"></canvas>
+                    <canvas height="100" width="150" class="padding canvasgreen" id="recoveredDaily"></canvas>
+                    <canvas height="100" width="150" class="padding canvasgrey" id="deathsDaily"></canvas>
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@
         $(document).ready(function () {
             $(".navbar-nav .nav-link").click(function (event) {
                 event.preventDefault();
-                $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+                $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 300);
             });
         });
     </script>
