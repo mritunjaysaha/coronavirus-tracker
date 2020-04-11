@@ -68,12 +68,12 @@
     <!-- Details state wise -->
     <hr class="w-90-95">
     <div id="table-state-data">
-        <h3 class="text-center padding">State-wise Stats</h3>
+        <h3 class="text-center">State-wise Stats</h3>
         <div id="show-data">
 
         </div>
     </div>
-    
+
     <div class="helpline-trends w-90-95">
         <!-- HELPLINE  -->
         <div id="helpline">
@@ -128,7 +128,7 @@
     <hr class="w-90-95">
 
     <!-- Footer -->
-    <div class="link w-90-95" >
+    <div id="faq" class="link w-90-95">
         <p class="text-center padding">This is not an official website by Government of India. For offical details click
             <a target="_blank" href="https://www.mohfw.gov.in/">here</a></p>
     </div>
@@ -157,11 +157,25 @@
 
     <!--  -->
     <script src="./corona.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".navbar-nav .nav-link").click(function (event) {
+                event.preventDefault();
+                $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+            });
+        });
+    </script>
+
     <!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
+
     <!-- Simple analytics -->
     <script data-skip-dnt="true" async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
     <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""></noscript>
+
 </body>
 
 </html>

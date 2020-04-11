@@ -154,11 +154,14 @@ tbody {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    padding: 4rem 0;
+    /* padding: 4rem 0; */
 }
-.helpline-trends #helpline {
+.helpline-trends h3{
+    padding: 3rem 0 2rem 0;
+}
+/* .helpline-trends #helpline {
     width: 30%;
-}
+} */
 
 #trends a {
     color: #333;
@@ -167,7 +170,13 @@ tbody {
 .w-90-95 hr {
     color: #555;
 }
-
+#table-state-data h3{
+    padding: 2rem 0;
+}
+#faq{
+    text-align: center;
+    padding-left: 1rem;
+}
 @media only screen and (max-width: 768px) {
     table,
     tbody,
@@ -185,5 +194,10 @@ tbody {
 
     .helpline-trends {
         flex-direction: column;
+    }
+
+    #helpline{
+        width: 100%;
+        margin: 0 auto;
     }
 }
