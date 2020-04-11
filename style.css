@@ -79,7 +79,7 @@ footer div p {
     color: white;
 }
 
-h4 {
+h4,h3 {
     overflow: hidden;
 }
 hr {
@@ -122,18 +122,19 @@ tbody {
     color: #000;
     text-decoration: underline;
 }
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
 
-.container canvas {
+#trends{
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+}
+canvas {
     background-color: #ffe0e6;
     border-radius: 10px;
     padding: 1rem;
 }
+
 @media only screen and (max-width: 768px) {
     table,
     tbody,

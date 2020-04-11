@@ -141,35 +141,45 @@ function addHelpline() {
 function addNewCases() {
     const promise = fetch(URL2);
     const totalCasesData = [];
-    let totalCasesDate = [];
+    let arrCasesDate = [];
     const dailyIncrease = [];
+    const recoveredEveryday = [];
+
+    const chartElements = {
+        chartId: "chartTotal",
+        title: "Total Cases",
+        dataArray: [],
+        dateArray: [],
+        backgroundColor: "red",
+        legendDisplay: false,
+    };
     promise
         .then(function (response) {
             const processingPromise = response.json();
             return processingPromise;
         })
         .then(function (processedResponse) {
-            console.log(processedResponse);
-
             //Total number of days
             const days = processedResponse.data.length;
             //To extract the data for the chart of total cases
+            console.log(processedResponse);
             let total, date;
             for (let i = 0; i < days; i++) {
                 total = processedResponse.data[i].summary.total;
                 date = processedResponse.data[i].day;
 
-                // console.log(`${date}: ${total}`)
-
                 totalCasesData.push(total);
-                totalCasesDate.push(date);
+                arrCasesDate.push(date);
             }
 
             //Format date
-            totalCasesDate = formatDate(totalCasesDate);
+            arrCasesDate = formatDate(arrCasesDate);
 
-            makeChartTotal(totalCasesDate, totalCasesData);
-
+            // makeChartTotal(totalCasesDate, totalCasesData);
+            chartElements.dataArray = totalCasesData;
+            chartElements.dateArray = arrCasesDate;
+            console.log(chartElements);
+            makeChart(chartElements);
             //To extract the data for the chart of daily increase in cases
             let cases;
             dailyIncrease.push(0);
@@ -180,14 +190,59 @@ function addNewCases() {
 
                 dailyIncrease.push(cases);
             }
-            makeChartDailyIncrease(dailyIncrease, totalCasesDate);
+            // makeChartDailyIncrease(dailyIncrease, totalCasesDate);
+
+            //Recovered Everyday
+            let reovered;
+            for (let i = 0; i < days; i++) {
+                reovered = processedResponse.data[i].summary.discharged;
+                // console.log(reovered);
+                recoveredEveryday.push(reovered);
+            }
+            // TODO: make chart
+
+            // Daily increase in recovered cases
+            let recoveredDaily;
+            const recoveredEverydayInc = []; //difference in recovered cases
+            recoveredEverydayInc.push(0);
+            for (let i = 1; i < days; i++) {
+                recoveredDaily =
+                    processedResponse.data[i].summary.discharged -
+                    processedResponse.data[i - 1].summary.discharged;
+                // console.log(recoveredDaily);
+                recoveredEverydayInc.push(recoveredDaily);
+            }
+            //TODO: make chart
+
+            //Deaths everyday
+            let deaths;
+            const deathsEveryday = [];
+            for (let i = 0; i < days; i++) {
+                deaths = processedResponse.data[i].summary.deaths;
+                // console.log(deaths);
+                deathsEveryday.push(deaths);
+            }
+
+            // TODO: make chart
+
+            //Daily increase in deaths
+            const deathsEverydayInc = [];
+            deathsEverydayInc.push(0);
+            for (let i = 1; i < days; i++) {
+                deaths =
+                    processedResponse.data[i].summary.deaths -
+                    processedResponse.data[i - 1].summary.deaths;
+
+                // console.log(deaths);
+                deathsEverydayInc.push(deaths);
+            }
+            // TODO: make chart
         });
 }
 function formatDate(dateArray) {
     for (let i = 0; i < dateArray.length; i++) {
         str = dateArray[i].slice(5);
         dateArray[i] = str;
-        console.log(dateArray[i]);
     }
     return dateArray;
 }
@@ -272,6 +327,56 @@ function makeChartDailyIncrease(dataArray, dateArray) {
                 labels: {
                     fontColor: "#000",
                 },
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
+                },
+            },
+            tooltips: {
+                enabled: true,
+            },
+        },
+    });
+}
+
+function makeChart(elements) {
+    let myChart = document.getElementById(`${elements.chartId}`);
+
+    let chart = new Chart(myChart, {
+        type: "line",
+        data: {
+            labels: elements.dateArray,
+            datasets: [
+                {
+                    label: elements.title,
+                    data: elements.dataArray,
+                    backgroundColor: elements.backgroundColor,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            callback: function (label, index, labels) {
+                                return label / 1000 + "k";
+                            },
+                        },
+                    },
+                ],
+            },
+            title: {
+                display: true,
+                text: elements.title,
+                fontSize: 20,
+            },
+            legend: {
+                display: elements.legendDisplay,
             },
             layout: {
                 padding: {
