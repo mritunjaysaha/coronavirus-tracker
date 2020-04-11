@@ -33,6 +33,9 @@
                     <a class="nav-link" href="#table-state-data">State-wise Stats</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="#trends">Spread Trends</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="#helpline">Helpline</a>
                 </li>
                 <li class="nav-item active">
@@ -63,52 +66,51 @@
     </div>
 
     <!-- Details state wise -->
-    <hr>
+    <hr class="w-90-95">
     <div id="table-state-data">
         <h3 class="text-center padding">State-wise Stats</h3>
         <div id="show-data">
 
         </div>
     </div>
-    <!-- HELPLINE  -->
-    <div id="helpline" class="padding">
-        <h3 class="text-center padding">Helpline</h3>
-        <div id="helpline-data"></div>
-    </div>
-    <!-- Trends -->
-    <div id="trends">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                    aria-selected="true">Cumulative</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                    aria-selected="false">Daily</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <canvas id="confirmedCasesCumulative"></canvas>
-                <canvas id="recoveredCumulative"></canvas>
-                <canvas id="deathsCumulative"></canvas>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <canvas id="confirmedIncreaseDaily"></canvas>
-                <canvas id="recoveredDaily"></canvas>
-                <canvas id="deathsDaily"></canvas>
+    
+    <div class="helpline-trends w-90-95">
+        <!-- HELPLINE  -->
+        <div id="helpline">
+            <h3 class="text-center padding">Helpline</h3>
+            <div id="helpline-data"></div>
+        </div>
+        <!-- Trends -->
+        <div id="trends" class="w-90-95">
+            <h3 class="text-center padding">Spread Trends</h3>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="cumulative-tab" data-toggle="tab" href="#cumulative" role="tab"
+                        aria-controls="cumulative" aria-selected="true">Cumulative</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily"
+                        aria-selected="false">Daily</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="cumulative" role="tabpanel" aria-labelledby="cumulative-tab">
+                    <canvas class="padding canvasred" id="confirmedCasesCumulative"></canvas>
+                    <canvas class="padding canvasgreen" id="recoveredCumulative"></canvas>
+                    <canvas class="padding canvasgrey" id="deathsCumulative"></canvas>
+                </div>
+                <div class="tab-pane fade" id="daily" role="tabpanel" aria-labelledby="daily-tab">
+                    <canvas class="padding canvasred" id="confirmedIncreaseDaily"></canvas>
+                    <canvas class="padding canvasgreen" id="recoveredDaily"></canvas>
+                    <canvas class="padding canvasgrey" id="deathsDaily"></canvas>
+                </div>
             </div>
         </div>
     </div>
 
-
-    <!-- <div id="trends" class="container">
-        <canvas id="chartTotal"></canvas>
-        <canvas id="chartDailyIncrease"></canvas>
-    </div> -->
-    <hr>
+    <hr class="w-90-95">
     <!-- Helpful links -->
-    <div id="helpful-links" class="link">
+    <div id="helpful-links" class="link w-90-95">
         <h3 class="text-center padding">Helpful Links</h3>
         <p>
             WHO: <a target="_blank" href="https://who.int/">World Health Organization</a>
@@ -123,10 +125,10 @@
             ICMR: <a target="_blank" href="https://icmr.nic.in/content/covid-19">Indian Council of Medical Research</a>
         </p>
     </div>
-    <hr>
+    <hr class="w-90-95">
 
     <!-- Footer -->
-    <div class="link">
+    <div class="link w-90-95" >
         <p class="text-center padding">This is not an official website by Government of India. For offical details click
             <a target="_blank" href="https://www.mohfw.gov.in/">here</a></p>
     </div>

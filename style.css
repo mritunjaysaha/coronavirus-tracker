@@ -79,20 +79,24 @@ footer div p {
     color: white;
 }
 
-h4,h3 {
+h4,
+h3 {
     overflow: hidden;
 }
 hr {
-    width: 90%;
+    /* width: 90%; */
     background-color: #555;
     margin: auto;
 }
 #helpful-links {
     display: block;
     margin: auto;
-    width: 90%;
+    /* width: 90%; */
     text-align: left;
     padding-bottom: 1rem;
+}
+#helpful-links p{
+    font-size: 16px;
 }
 table,
 tbody {
@@ -123,10 +127,13 @@ tbody {
     text-decoration: underline;
 }
 
-#trends{
+#trends {
     position: relative;
     display: block;
     margin: 0 auto;
+    /* width: 90%; */
+}
+.w-90-95 {
     width: 90%;
 }
 /* canvas {
@@ -134,6 +141,32 @@ tbody {
     border-radius: 10px;
     padding: 1rem;
 } */
+.canvarred {
+    background-color: ;
+}
+.canvasgreen {
+    background-color: ;
+}
+.canvargrey {
+    background-color: ;
+}
+.helpline-trends {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 4rem 0;
+}
+.helpline-trends #helpline {
+    width: 30%;
+}
+
+#trends a {
+    color: #333;
+}
+
+.w-90-95 hr {
+    color: #555;
+}
 
 @media only screen and (max-width: 768px) {
     table,
@@ -142,17 +175,15 @@ tbody {
         width: 95%;
     }
 
-    #helpful-links {
+    .w-90-95 {
         width: 95%;
     }
-
     .summary {
         flex-direction: column;
         padding: 3rem 0 1rem 0;
     }
 
-    tr th:nth-child(6),
-    tr td:nth-child(6) {
-        display: none;
+    .helpline-trends {
+        flex-direction: column;
     }
 }

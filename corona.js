@@ -63,7 +63,7 @@ function addData() {
             //CREATE HTML TABLE HEARDER ROW USING THE EXTRACTED HEADERS ABOVE
             var tr = table.insertRow(-1); //TABLE ROW
 
-            for (var i = 0; i < col.length; i++) {
+            for (var i = 0; i < col.length-1; i++) {
                 var th = document.createElement("th");
                 th.innerHTML = colHeader[i];
                 tr.appendChild(th);
@@ -72,8 +72,7 @@ function addData() {
             //ADD JSON DATA TO THE TABLE AS ROWS
             for (var i = 0; i < stateList.length; i++) {
                 tr = table.insertRow(-1);
-
-                for (var j = 0; j < col.length; j++) {
+                for (var j = 0; j < col.length-1; j++) {
                     var tabCell = tr.insertCell(-1);
                     tabCell.innerHTML = stateList[i][col[j]];
                 }
@@ -163,7 +162,6 @@ function addNewCases() {
             //Total number of days
             const days = processedResponse.data.length;
             //To extract the data for the chart of total cases
-            console.log(processedResponse);
             let total, date;
             for (let i = 0; i < days; i++) {
                 total = processedResponse.data[i].summary.total;
@@ -186,7 +184,6 @@ function addNewCases() {
                 "red",
                 "line"
             );
-            console.log(chartElements);
             makeChart(chartElements);
 
             //To extract the data for the chart of daily increase in cases
@@ -202,7 +199,7 @@ function addNewCases() {
             updateElements(
                 chartElements,
                 "confirmedIncreaseDaily",
-                "COnfirmed Cases",
+                "Confirmed Cases",
                 dailyIncrease,
                 "red",
                 "bar"
