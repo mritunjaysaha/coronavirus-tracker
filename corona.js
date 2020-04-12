@@ -1,40 +1,33 @@
 const URL = "https://api.rootnet.in/covid19-in/stats/latest";
 const URL1 = "https://api.rootnet.in/covid19-in/contacts";
 const URL2 = "https://api.rootnet.in/covid19-in/stats/history";
-// window.onload = addData;
 
 const addSummary = async () => {
     const response = await fetch(URL);
     const processedResponse = await response.json();
 
-    const totalCases = document.getElementById("total-cases");
-    const recovered = document.getElementById("recovered");
-    const fatal = document.getElementById("fatal");
-    const confirmedCasesIndian = document.getElementById("confirmed-india");
-    const confirmedCasesForeign = document.getElementById("confirmed-foreign");
+    //create the p tags for summary
+    const totalCases = processedResponse.data.summary.total;
+    createPtag("total-cases", totalCases);
 
-    let p = document.createElement("p");
-    p.innerHTML = processedResponse.data.summary.total;
-    totalCases.appendChild(p);
+    const recovered = processedResponse.data.summary.discharged;
+    createPtag("recovered", recovered);
 
-    p = document.createElement("p");
-    p.innerHTML = processedResponse.data.summary.discharged;
-    recovered.appendChild(p);
+    const fatal = processedResponse.data.summary.deaths;
+    createPtag("fatal", fatal);
 
-    p = document.createElement("p");
-    p.innerHTML = processedResponse.data.summary.deaths;
-    fatal.appendChild(p);
+    const confirmedCasesIndian =
+        processedResponse.data.summary.confirmedCasesIndian;
+    createPtag("confirmed-india", confirmedCasesIndian);
 
-    p = document.createElement("p");
-    p.innerHTML = processedResponse.data.summary.confirmedCasesIndian;
-    confirmedCasesIndian.appendChild(p);
+    const confirmedCasesForeign =
+        processedResponse.data.summary.confirmedCasesForeign;
+    createPtag("confirmed-foreign", confirmedCasesForeign);
 
-    p = document.createElement("p");
-    p.innerHTML = processedResponse.data.summary.confirmedCasesForeign;
-    confirmedCasesForeign.appendChild(p);
+    const dateTime = processedResponse.lastRefreshed;
+    createPtag("last-updated", timeToWords(dateTime));
 
     //Add state wise data in a table
-
     const stateListStatWise = processedResponse.data.regional;
 
     // Values for table header
@@ -53,6 +46,60 @@ const addSummary = async () => {
     };
     createTable(tableElements);
 };
+
+function timeToWords(time, lang) {
+    lang = lang || {
+        postfixes: {
+            "<": " ago",
+            ">": " from now",
+        },
+        1000: {
+            singular: "a few moments",
+            plural: "a few moments",
+        },
+        60000: {
+            singular: "about a minute",
+            plural: "# minutes",
+        },
+        3600000: {
+            singular: "about an hour",
+            plural: "# hours",
+        },
+        86400000: {
+            singular: "a day",
+            plural: "# days",
+        },
+    };
+
+    var timespans = [1000, 60000, 3600000, 86400000];
+    var parsedTime = Date.parse(time.replace(/\-00:?00$/, ""));
+
+    if (parsedTime && Date.now) {
+        var timeAgo = parsedTime - Date.now();
+        var diff = Math.abs(timeAgo);
+        var postfix = lang.postfixes[timeAgo < 0 ? "<" : ">"];
+        var timespan = timespans[0];
+
+        for (var i = 1; i < timespans.length; i++) {
+            if (diff > timespans[i]) {
+                timespan = timespans[i];
+            }
+        }
+
+        var n = Math.round(diff / timespan);
+
+        return (
+            lang[timespan][n > 1 ? "plural" : "singular"].replace("#", n) +
+            postfix
+        );
+    }
+}
+function createPtag(id, data) {
+    let container = document.getElementById(id);
+    let p = document.createElement("p");
+    p.innerHTML = data;
+    container.appendChild(p);
+}
 
 const addHelplineData = async () => {
     const response = await fetch(URL1);

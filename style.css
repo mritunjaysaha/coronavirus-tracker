@@ -84,18 +84,16 @@ h3 {
     overflow: hidden;
 }
 hr {
-    /* width: 90%; */
     background-color: #555;
     margin: auto;
 }
 #helpful-links {
     display: block;
     margin: auto;
-    /* width: 90%; */
     text-align: left;
     padding-bottom: 1rem;
 }
-#helpful-links p{
+#helpful-links p {
     font-size: 16px;
 }
 table,
@@ -131,16 +129,10 @@ tbody {
     position: relative;
     display: block;
     margin: 0 auto;
-    /* width: 90%; */
 }
 .w-90-95 {
     width: 90%;
 }
-/* canvas {
-    background-color: #ffe0e6;
-    border-radius: 10px;
-    padding: 1rem;
-} */
 .canvarred {
     background-color: ;
 }
@@ -156,13 +148,9 @@ tbody {
     margin: 0 auto;
     /* padding: 4rem 0; */
 }
-.helpline-trends h3{
+.helpline-trends h3 {
     padding: 3rem 0 2rem 0;
 }
-/* .helpline-trends #helpline {
-    width: 30%;
-} */
-
 #trends a {
     color: #333;
 }
@@ -170,14 +158,24 @@ tbody {
 .w-90-95 hr {
     color: #555;
 }
-#table-state-data h3{
+#table-state-data h3 {
     padding: 2rem 0;
 }
-#faq{
+#faq {
     text-align: center;
     padding-left: 1rem;
 }
+#last-updated{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 5rem;
+    color: #555;
+}
 @media only screen and (max-width: 768px) {
+    #last-updated{
+        padding-left: 1rem;
+    }
     table,
     tbody,
     hr {
@@ -196,14 +194,13 @@ tbody {
         flex-direction: column;
     }
 
-    #helpline{
+    #helpline {
         width: 100%;
         margin: 0 auto;
     }
 
-    canvas{
+    canvas {
         width: 200;
         height: 200;
     }
-
 }
