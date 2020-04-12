@@ -24,7 +24,6 @@ const addSummary = async () => {
         processedResponse.data.summary.confirmedCasesForeign;
     createPtag("confirmed-foreign", confirmedCasesForeign);
 
-    console.log(processedResponse)
     const dateTime = processedResponse.lastOriginUpdate;
     createPtag("last-updated", timeToWords(dateTime));
 

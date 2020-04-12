@@ -147,21 +147,6 @@ canvas{
 .canvasgrey {
     background-color: rgb(233, 233, 233);
 }
-.helpline-trends {
-    display: flex;
-    flex-direction: row;
-    margin: 0 2em;
-    justify-content: center;
-    /* width: 90%; */
-}
-
-#table-state-data, #helpline{
-    width: 100%;
-}
-
-.helpline-trends h3 {
-    padding: 3rem 0 1rem 0;
-}
 #trends a {
     color: #333;
 }
@@ -169,9 +154,6 @@ canvas{
 .w-90-95 hr {
     color: #555;
 }
-/* #table-state-data h3 {
-    padding: 2rem 0;
-} */
 #faq {
     text-align: center;
     padding-left: 1rem;
@@ -183,8 +165,9 @@ canvas{
     padding-left: 5rem;
     color: #555;
 }
-canvas {
-    height: 30%;
+.arrang-canvas {
+    display: flex;
+    flex: row;
 }
 @media only screen and (max-width: 768px) {
     #last-updated {
@@ -202,20 +185,6 @@ canvas {
     .summary {
         flex-direction: column;
         padding: 3rem 0 1rem 0;
-    }
-
-    .helpline-trends {
-        flex-direction: column;
-    }
-
-    #helpline {
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    canvas {
-        width: 200;
-        height: 200;
     }
 }
 @media only screen and (max-width: 1440px){
