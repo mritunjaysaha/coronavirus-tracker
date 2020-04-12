@@ -41,15 +41,12 @@ tbody tr:last-of-type {
 }
 
 .padding {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 2rem 0;
 }
 .summary {
     margin: 0 auto;
-    padding-top: 2rem;
     display: flex;
     flex-direction: row;
-    padding: 4rem 0 1rem 0;
     justify-content: space-evenly;
     text-align: center;
 }
@@ -87,6 +84,7 @@ hr {
     background-color: #555;
     margin: auto;
 }
+
 #helpful-links {
     display: block;
     margin: auto;
@@ -165,10 +163,7 @@ canvas{
     padding-left: 5rem;
     color: #555;
 }
-.arrang-canvas {
-    display: flex;
-    flex: row;
-}
+
 @media only screen and (max-width: 768px) {
     #last-updated {
         padding-left: 1rem;
