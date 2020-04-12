@@ -24,7 +24,8 @@ const addSummary = async () => {
         processedResponse.data.summary.confirmedCasesForeign;
     createPtag("confirmed-foreign", confirmedCasesForeign);
 
-    const dateTime = processedResponse.lastRefreshed;
+    console.log(processedResponse)
+    const dateTime = processedResponse.lastOriginUpdate;
     createPtag("last-updated", timeToWords(dateTime));
 
     //Add state wise data in a table
@@ -284,11 +285,16 @@ function makeChart(elements) {
                     label: elements.title,
                     data: elements.dataArray,
                     backgroundColor: elements.backgroundColor,
+                    // borderColor: "#E4F4E8",
+
                     fill: false,
                 },
             ],
         },
         options: {
+            // maintainAspectRatio: false,
+            responsive: true,
+            // maintainAspectRatio: false,
             scales: {
                 xAxes: [
                     {
@@ -308,6 +314,7 @@ function makeChart(elements) {
                             callback: function (label, index, labels) {
                                 return label / 1000 + "k";
                             },
+                            beginAtZero: true,
                         },
                     },
                 ],

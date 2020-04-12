@@ -133,23 +133,34 @@ tbody {
 .w-90-95 {
     width: 90%;
 }
-.canvarred {
-    background-color: ;
+canvas{
+    margin: 2em auto;
+    border-radius: 10px;
+}
+
+.canvasred {
+    background-color: rgb(255, 221, 221);
 }
 .canvasgreen {
-    background-color: ;
+    background-color: rgb(212, 230, 218);
 }
-.canvargrey {
-    background-color: ;
+.canvasgrey {
+    background-color: rgb(233, 233, 233);
 }
 .helpline-trends {
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
-    /* padding: 4rem 0; */
+    margin: 0 2em;
+    justify-content: center;
+    /* width: 90%; */
 }
+
+#table-state-data, #helpline{
+    width: 100%;
+}
+
 .helpline-trends h3 {
-    padding: 3rem 0 2rem 0;
+    padding: 3rem 0 1rem 0;
 }
 #trends a {
     color: #333;
@@ -158,22 +169,25 @@ tbody {
 .w-90-95 hr {
     color: #555;
 }
-#table-state-data h3 {
+/* #table-state-data h3 {
     padding: 2rem 0;
-}
+} */
 #faq {
     text-align: center;
     padding-left: 1rem;
 }
-#last-updated{
+#last-updated {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     padding-left: 5rem;
     color: #555;
 }
+canvas {
+    height: 30%;
+}
 @media only screen and (max-width: 768px) {
-    #last-updated{
+    #last-updated {
         padding-left: 1rem;
     }
     table,
@@ -203,4 +217,7 @@ tbody {
         width: 200;
         height: 200;
     }
+}
+@media only screen and (max-width: 1440px){
+
 }

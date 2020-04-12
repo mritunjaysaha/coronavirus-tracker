@@ -70,42 +70,43 @@
 
     <!-- Details state wise -->
     <hr class="w-90-95">
-    <div id="table-state-data">
-        <h3 class="text-center">State-wise Stats</h3>
-        <div id="statewise-data">
+    <div class="helpline-trends">
+        <div id="table-state-data">
+            <h3 class="text-center">State-wise Stats</h3>
+            <div id="statewise-data">
+            </div>
+        </div>
+        <!-- HELPLINE  -->
+        <div id="helpline">
+            <h3 class="text-center">Helpline</h3>
+            <div id="helpline-data"></div>
         </div>
     </div>
 
-    <div class="helpline-trends w-90-95">
-        <!-- HELPLINE  -->
-        <div id="helpline">
-            <h3 class="text-center padding">Helpline</h3>
-            <div id="helpline-data"></div>
-        </div>
-        <!-- Trends -->
-        <div id="trends" class="w-90-95">
-            <h3 class="text-center padding">Spread Trends</h3>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="cumulative-tab" data-toggle="tab" href="#cumulative" role="tab"
-                        aria-controls="cumulative" aria-selected="true">Cumulative</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily"
-                        aria-selected="false">Daily</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="cumulative" role="tabpanel" aria-labelledby="cumulative-tab">
-                    <canvas height="100" width="150" class="padding canvasred" id="confirmedCasesCumulative"></canvas>
-                    <canvas height="100" width="150" class="padding canvasgreen" id="recoveredCumulative"></canvas>
-                    <canvas height="100" width="150" class="padding canvasgrey" id="deathsCumulative"></canvas>
-                </div>
-                <div class="tab-pane fade" id="daily" role="tabpanel" aria-labelledby="daily-tab">
-                    <canvas height="100" width="150" class="padding canvasred" id="confirmedIncreaseDaily"></canvas>
-                    <canvas height="100" width="150" class="padding canvasgreen" id="recoveredDaily"></canvas>
-                    <canvas height="100" width="150" class="padding canvasgrey" id="deathsDaily"></canvas>
-                </div>
+
+    <!-- Trends -->
+    <div id="trends" class="w-90-95">
+        <h3 class="text-center padding">Spread Trends</h3>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="cumulative-tab" data-toggle="tab" href="#cumulative" role="tab"
+                    aria-controls="cumulative" aria-selected="true">Cumulative</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily"
+                    aria-selected="false">Daily</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="cumulative" role="tabpanel" aria-labelledby="cumulative-tab">
+                <canvas height="100" width="150" class="padding canvasred" id="confirmedCasesCumulative"></canvas>
+                <canvas height="100" width="150" class="padding canvasgreen" id="recoveredCumulative"></canvas>
+                <canvas height="100" width="150" class="padding canvasgrey" id="deathsCumulative"></canvas>
+            </div>
+            <div class="tab-pane fade" id="daily" role="tabpanel" aria-labelledby="daily-tab">
+                <canvas height="100" width="150" class="padding canvasred" id="confirmedIncreaseDaily"></canvas>
+                <canvas height="100" width="150" class="padding canvasgreen" id="recoveredDaily"></canvas>
+                <canvas height="100" width="150" class="padding canvasgrey" id="deathsDaily"></canvas>
             </div>
         </div>
     </div>
