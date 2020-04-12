@@ -284,13 +284,26 @@ function makeChart(elements) {
                     label: elements.title,
                     data: elements.dataArray,
                     backgroundColor: elements.backgroundColor,
+                    fill: false,
                 },
             ],
         },
         options: {
             scales: {
+                xAxes: [
+                    {
+                        gridLines: {
+                            display: false,
+                        },
+                    },
+                ],
                 yAxes: [
                     {
+                        // display: true,
+                        // position: right,
+                        gridLines: {
+                            // display: false,
+                        },
                         ticks: {
                             callback: function (label, index, labels) {
                                 return label / 1000 + "k";
