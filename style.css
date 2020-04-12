@@ -49,7 +49,7 @@ tbody tr:last-of-type {
     padding-top: 2rem;
     display: flex;
     flex-direction: row;
-    padding: 3rem 0 0 0;
+    padding: 4rem 0 1rem 0;
     justify-content: space-evenly;
     text-align: center;
 }

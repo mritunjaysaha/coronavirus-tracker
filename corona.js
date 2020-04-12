@@ -41,7 +41,7 @@ function addData() {
             const stateList = processedResponse.data.regional;
 
             //values for HTML header.
-            var colHeader = [
+            let colHeader = [
                 "State/UT",
                 "Indian",
                 "Foreigner",
@@ -49,37 +49,37 @@ function addData() {
                 "Fatal",
                 "Total confirmed",
             ];
-            var col = [];
-            for (var i = 0; i < stateList.length; i++) {
-                for (var key in stateList[i]) {
+            let col = [];
+            for (let i = 0; i < stateList.length; i++) {
+                for (let key in stateList[i]) {
                     if (col.indexOf(key) === -1) {
                         col.push(key);
                     }
                 }
             }
             //CREATE DYNAMIC TABLE
-            var table = document.createElement("table");
+            let table = document.createElement("table");
 
             //CREATE HTML TABLE HEARDER ROW USING THE EXTRACTED HEADERS ABOVE
-            var tr = table.insertRow(-1); //TABLE ROW
+            let tr = table.insertRow(-1); //TABLE ROW
 
-            for (var i = 0; i < col.length-1; i++) {
-                var th = document.createElement("th");
+            for (let i = 0; i < col.length - 1; i++) {
+                let th = document.createElement("th");
                 th.innerHTML = colHeader[i];
                 tr.appendChild(th);
             }
 
             //ADD JSON DATA TO THE TABLE AS ROWS
-            for (var i = 0; i < stateList.length; i++) {
+            for (let i = 0; i < stateList.length; i++) {
                 tr = table.insertRow(-1);
-                for (var j = 0; j < col.length-1; j++) {
-                    var tabCell = tr.insertCell(-1);
+                for (let j = 0; j < col.length - 1; j++) {
+                    let tabCell = tr.insertCell(-1);
                     tabCell.innerHTML = stateList[i][col[j]];
                 }
             }
 
             //FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-            var divContainer = document.getElementById("show-data");
+            const divContainer = document.getElementById("show-data");
             divContainer.innerHTML = "";
             divContainer.appendChild(table);
         });
@@ -100,9 +100,9 @@ function addHelpline() {
             //Generate table
             const hospitalList = processedResponse.data.contacts.regional;
 
-            var col = [];
-            for (var i = 0; i < hospitalList.length; i++) {
-                for (var key in hospitalList[i]) {
+            let col = [];
+            for (let i = 0; i < hospitalList.length; i++) {
+                for (let key in hospitalList[i]) {
                     if (col.indexOf(key) === -1) {
                         col.push(key);
                     }
@@ -110,30 +110,29 @@ function addHelpline() {
             }
 
             //create dynamic table
-            var table = document.createElement("table");
+            let table = document.createElement("table");
 
-            var tr = table.insertRow(-1);
+            let tr = table.insertRow(-1);
 
             const colHeader = ["State", "Number"];
-            for (var i = 0; i < col.length; i++) {
-                var th = document.createElement("th");
+            for (let i = 0; i < col.length; i++) {
+                let th = document.createElement("th");
                 th.innerHTML = colHeader[i];
                 tr.appendChild(th);
             }
 
             //Add json data to the table rows
-            for (var i = 0; i < hospitalList.length; i++) {
+            for (let i = 0; i < hospitalList.length; i++) {
                 tr = table.insertRow(-1);
 
-                for (var j = 0; j < col.length; j++) {
-                    var tabCell = tr.insertCell(-1);
+                for (let j = 0; j < col.length; j++) {
+                    let tabCell = tr.insertCell(-1);
                     tabCell.innerHTML = hospitalList[i][col[j]];
                 }
-
-                var divContainer = document.getElementById("helpline-data");
-                divContainer.innerHTML = "";
-                divContainer.appendChild(table);
             }
+            const divContainer = document.getElementById("helpline-data");
+            divContainer.innerHTML = "";
+            divContainer.appendChild(table);
         });
 }
 
@@ -212,7 +211,6 @@ function addNewCases() {
                 reovered = processedResponse.data[i].summary.discharged;
                 recoveredEveryday.push(reovered);
             }
-            // TODO: make chart
             updateElements(
                 chartElements,
                 "recoveredCumulative",
@@ -233,7 +231,6 @@ function addNewCases() {
                     processedResponse.data[i - 1].summary.discharged;
                 recoveredEverydayInc.push(recoveredDaily);
             }
-            //TODO: make chart
             updateElements(
                 chartElements,
                 "recoveredDaily",
@@ -249,7 +246,6 @@ function addNewCases() {
             const deathsEveryday = [];
             for (let i = 0; i < days; i++) {
                 deaths = processedResponse.data[i].summary.deaths;
-                // console.log(deaths);
                 deathsEveryday.push(deaths);
             }
             updateElements(
@@ -261,7 +257,6 @@ function addNewCases() {
                 "line"
             );
             makeChart(chartElements);
-            // TODO: make chart
 
             //Daily increase in deaths
             const deathsEverydayInc = [];
@@ -271,10 +266,8 @@ function addNewCases() {
                     processedResponse.data[i].summary.deaths -
                     processedResponse.data[i - 1].summary.deaths;
 
-                // console.log(deaths);
                 deathsEverydayInc.push(deaths);
             }
-            // TODO: make chart
             updateElements(
                 chartElements,
                 "deathsDaily",
