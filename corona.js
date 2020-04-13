@@ -34,9 +34,9 @@ const addSummary = async () => {
     let colHeaderStateWise = [
         "State/UT",
         "Indian",
-        "Foreigner",
         "Recovered",
         "Fatal",
+        "Foreigner",
     ];
     const tableElements = {
         stateList: stateListStatWise,
@@ -66,8 +66,7 @@ const addCharts = async () => {
     const processedResponse = await response.json();
 
     await addSummary(); //The summary function is called here so that the increase in number of cases appear after total cases
-    
-    
+
     const totalCasesData = [];
     let arrCasesDate = [];
     const dailyIncrease = [];
