@@ -83,15 +83,21 @@ table tr p{
 }
 .ptags{
     display: inline-flex;
+    flex-direction: row;
 }
 .ptags p{
     padding-right: 0.2em;
 }
 .ptags-inc{
-    font-family: Arial, Helvetica, sans-serif;
     color: #f00;
     font-weight: 100;
 }
+.fas{
+    font-size: 10px;
+}
+
+
+
 
 /* summary of cases */
 .summary {
@@ -226,11 +232,14 @@ canvas {
 
 
 @media only screen and (max-width: 768px) {
-    
+    /* Table */
     table,
     tbody,
     hr {
         width: 95%;
+    }
+    .ptags{
+        flex-direction: column;
     }
 
     .w-90-95 {
