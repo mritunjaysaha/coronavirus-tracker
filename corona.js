@@ -359,9 +359,11 @@ function createTable(object, increaseData, makeChanges) {
                     }
                 }
             } else {
-                tabCell.innerHTML = `<p class="ptags">${
-                    stateList[i][col[j]]
-                }</p>`;
+                tabCell.innerHTML = `
+                        <div class="ptags">
+                            <p >${stateList[i][col[j]]}</p>
+                        </div>
+                        `;
             }
         }
     }
