@@ -51,7 +51,8 @@ table,
 th,
 td {
     border-collapse: collapse;
-    padding: 10px 4px;
+    padding: 1.2em 0.2em 0 0.2em;
+    
     text-align: center;
     margin: auto;
     overflow-x: hidden;
@@ -60,6 +61,7 @@ th {
     font-weight: bold;
     background-color: #009879;
     color: #ffffff;
+    padding: 0.4rem;
 }
 tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
@@ -76,8 +78,19 @@ tbody {
 }
 
 
-
-
+table tr p{
+    align-items: center;
+}
+.ptags{
+    display: inline-flex;
+}
+.ptags p{
+    padding-right: 0.2em;
+}
+.ptags-inc{
+    color: #f00;
+    font-weight: 100;
+}
 
 /* summary of cases */
 .summary {
