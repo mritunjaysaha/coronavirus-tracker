@@ -20,7 +20,9 @@ hr {
 .w-90-95 {
     width: 90%;
 }
-
+.padding {
+    padding: 2rem 0;
+}
 
 
 
@@ -51,8 +53,7 @@ table,
 th,
 td {
     border-collapse: collapse;
-    padding: 1.2em 0.2em 0 0.2em;
-    
+    padding: 0.5em;
     text-align: center;
     margin: auto;
     overflow-x: hidden;
@@ -60,6 +61,8 @@ td {
 th {
     font-weight: bold;
     background-color: #009879;
+    padding: 1.2em 0.2em 0 0.2em;
+
     color: #ffffff;
     padding: 0.4rem;
 }
@@ -69,16 +72,15 @@ tbody tr:nth-of-type(even) {
 tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
-.padding {
-    padding: 2rem 0;
-}
+
 table,
 tbody {
     width: 90%;
 }
 
 
-table tr p{
+
+/* table tr p{
     align-items: center;
 }
 .ptags{
@@ -94,7 +96,7 @@ table tr p{
 }
 .fas{
     font-size: 10px;
-}
+} */
 
 
 
@@ -127,7 +129,9 @@ table tr p{
     font-size: 12px;
     
 }
-
+#last-updated p{
+    padding-right: 5px;
+}
 
 
 

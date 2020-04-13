@@ -5,8 +5,6 @@ const URL2 = "https://api.rootnet.in/covid19-in/stats/history";
 const addSummary = async () => {
     const response = await fetch(URL);
     const processedResponse = await response.json();
-    const response2 = await fetch(URL2);
-    const processedResponse2 = await response2.json();
 
     //create the p tags for summary
     const totalCases = processedResponse.data.summary.total;
@@ -29,38 +27,6 @@ const addSummary = async () => {
     const dateTime = processedResponse.lastOriginUpdate;
     createPtag("last-updated", timeToWords(dateTime));
 
-    // create p tags for increase in cases
-    const len = processedResponse2.data.length - 1;
-
-    const increaseInCases =
-        processedResponse2.data[len].summary.total -
-        processedResponse2.data[len - 1].summary.total;
-    createPtagIncreaseCases("total-cases", increaseInCases);
-
-    // Increase in cases of Indians
-    const increaseIndian =
-        processedResponse2.data[len].summary.confirmedCasesIndian -
-        processedResponse2.data[len - 1].summary.confirmedCasesIndian;
-    createPtagIncreaseCases("confirmed-india", increaseIndian);
-
-    // Increase in cases of Foreigners
-    const increaseForiegner =
-        processedResponse2.data[len].summary.confirmedCasesForeign -
-        processedResponse2.data[len - 1].summary.confirmedCasesForeign;
-    createPtagIncreaseCases("confirmed-foreign", increaseForiegner);
-
-    // Increase in recovered cases
-    const increaseRecovered =
-        processedResponse2.data[len].summary.discharged -
-        processedResponse2.data[len - 1].summary.discharged;
-    createPtagIncreaseCases("recovered", increaseRecovered);
-
-    // Increase in deaths
-    const increaseDeaths =
-        processedResponse2.data[len].summary.deaths -
-        processedResponse2.data[len - 1].summary.deaths;
-    createPtagIncreaseCases("fatal", increaseDeaths);
-
     //Add state wise data in a table
     const stateListStatWise = processedResponse.data.regional;
 
@@ -68,9 +34,9 @@ const addSummary = async () => {
     let colHeaderStateWise = [
         "State/UT",
         "Indian",
+        "Foreigner",
         "Recovered",
         "Fatal",
-        "Foreign",
     ];
     const tableElements = {
         stateList: stateListStatWise,
@@ -78,10 +44,7 @@ const addSummary = async () => {
         containerId: "statewise-data",
         columns: colHeaderStateWise.length,
     };
-    createTable(tableElements, processedResponse2, true);
-
-    addCharts(processedResponse2);
-    
+    createTable(tableElements);
 };
 const addHelplineData = async () => {
     const response = await fetch(URL1);
@@ -96,9 +59,15 @@ const addHelplineData = async () => {
         containerId: "helpline-data",
         columns: colHeaderHelpline.length,
     };
-    createTable(tableElements, null, false);
+    createTable(tableElements);
 };
-const addCharts = async (processedResponse) => {
+const addCharts = async () => {
+    const response = await fetch(URL2);
+    const processedResponse = await response.json();
+
+    await addSummary(); //The summary function is called here so that the increase in number of cases appear after total cases
+    
+    
     const totalCasesData = [];
     let arrCasesDate = [];
     const dailyIncrease = [];
@@ -113,6 +82,37 @@ const addCharts = async (processedResponse) => {
         legendDisplay: false,
         type: "",
     };
+
+    // Increase in total cases
+    const len = processedResponse.data.length - 1;
+    const increaseInCases =
+        processedResponse.data[len].summary.total -
+        processedResponse.data[len - 1].summary.total;
+    createPtagIncreaseCases("total-cases", increaseInCases);
+
+    // Increase in cases of Indians
+    const increaseIndian =
+        processedResponse.data[len].summary.confirmedCasesIndian -
+        processedResponse.data[len - 1].summary.confirmedCasesIndian;
+    createPtagIncreaseCases("confirmed-india", increaseIndian);
+
+    // Increase in cases of Foreigners
+    const increaseForiegner =
+        processedResponse.data[len].summary.confirmedCasesForeign -
+        processedResponse.data[len - 1].summary.confirmedCasesForeign;
+    createPtagIncreaseCases("confirmed-foreign", increaseForiegner);
+
+    // Increase in recovered cases
+    const increaseRecovered =
+        processedResponse.data[len].summary.discharged -
+        processedResponse.data[len - 1].summary.discharged;
+    createPtagIncreaseCases("recovered", increaseRecovered);
+
+    // Increase in deaths
+    const increaseDeaths =
+        processedResponse.data[len].summary.deaths -
+        processedResponse.data[len - 1].summary.deaths;
+    createPtagIncreaseCases("fatal", increaseDeaths);
 
     //Total number of days
     const days = processedResponse.data.length;
@@ -235,7 +235,7 @@ const addCharts = async (processedResponse) => {
     makeChart(chartElements);
 };
 
-function createTable(object, increaseData, makeChanges) {
+function createTable(object) {
     const stateList = object.stateList;
     const colHeader = object.colHeader;
     const containerId = object.containerId;
@@ -247,11 +247,6 @@ function createTable(object, increaseData, makeChanges) {
                 col.push(key);
             }
         }
-    }
-
-    let len;
-    if (makeChanges === true) {
-        len = increaseData.data.length - 1;
     }
 
     //create dynamic table
@@ -267,104 +262,11 @@ function createTable(object, increaseData, makeChanges) {
     }
     tr.appendChild(fragment);
     //ADD JSON DATA TO THE TABLE AS ROWS
-    let tabCell;
-    let incIndian, incForeigner, incRecovered, incDeaths;
     for (let i = 0; i < stateList.length; i++) {
         tr = table.insertRow(-1);
         for (let j = 0; j < columnsLen; j++) {
-            tabCell = tr.insertCell(-1);
-            if (makeChanges === true) {
-                incIndian =
-                    increaseData.data[len].regional[i].confirmedCasesIndian -
-                    increaseData.data[len - 1].regional[i].confirmedCasesIndian;
-                incForeigner =
-                    increaseData.data[len].regional[i].confirmedCasesForeign -
-                    increaseData.data[len - 1].regional[i]
-                        .confirmedCasesForeign;
-                incRecovered =
-                    increaseData.data[len].regional[i].discharged -
-                    increaseData.data[len - 1].regional[i].discharged;
-                incDeaths =
-                    increaseData.data[len].regional[i].deaths -
-                    increaseData.data[len - 1].regional[i].deaths;
-
-                if (j === 0) {
-                    tabCell.innerHTML = `<p>${stateList[i][col[j]]}</p>`;
-                }
-                if (j === 1) {
-                    if (incIndian > 0) {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc"><i class="fas fa-sort-up"></i>${incIndian}</p>
-                        </div>
-                        `;
-                    } else {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                        </div>
-                        `;
-                    }
-                }
-                if (j === 2) {
-                    if (incRecovered > 0) {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc">
-                            <i class="fas fa-sort-up"></i>${incRecovered}</p>
-                        </div>
-                        `;
-                    } else {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                        </div>
-                        `;
-                    }
-                }
-                if (j === 3) {
-                    if (incDeaths > 0) {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc">
-                            <i class="fas fa-sort-up"></i>${incDeaths}</p>
-                        </div>
-                        `;
-                    } else {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                        </div>
-                        `;
-                    }
-                }
-                if (j === 4) {
-                    if (incForeigner > 0) {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc">
-                            <i class="fas fa-sort-up"></i>${incForeigner}</p>
-                        </div>
-                        `;
-                    } else {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                        </div>
-                        `;
-                    }
-                }
-            } else {
-                tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                        </div>
-                        `;
-            }
+            let tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = stateList[i][col[j]];
         }
     }
 
@@ -518,5 +420,6 @@ function updateElements(dataObject, id, title, array, color, chartType) {
     dataObject.title = title;
 }
 
-window.onload = addSummary();
+// window.onload = addSummary();
 window.onload = addHelplineData();
+window.onload = addCharts();
