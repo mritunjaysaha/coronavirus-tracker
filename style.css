@@ -6,13 +6,41 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+hr {
+    background-color: #555;
+    margin: auto;
+}
+.link a {
+    color: #000;
+    text-decoration: underline;
+}
+.w-90-95 hr {
+    color: #555;
+}
+.w-90-95 {
+    width: 90%;
+}
 
+
+
+
+
+/* Hiding the overflow of header tags */
+h4,
+h3 {
+    overflow: hidden;
+}
+
+
+
+
+
+/* TABLE */
 th,
 td,
 p {
     font-family: monospace;
 }
-
 table {
     font-size: 0.9rem;
     border-radius: 5px 5px 0 0;
@@ -39,10 +67,19 @@ tbody tr:nth-of-type(even) {
 tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
-
 .padding {
     padding: 2rem 0;
 }
+table,
+tbody {
+    width: 90%;
+}
+
+
+
+
+
+/* summary of cases */
 .summary {
     margin: 0 auto;
     display: flex;
@@ -58,6 +95,24 @@ tbody tr:last-of-type {
 .summary div p {
     font-size: 20px;
 }
+#last-updated {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 5rem;
+    color: #555;
+}
+.summary div p:nth-child(3){
+    color: #999;
+    font-size: 12px;
+    
+}
+
+
+
+
+
+/* footer */
 .footerWrapper {
     margin: 0;
     background-color: #555;
@@ -71,20 +126,20 @@ footer {
     align-items: center;
     padding: 0;
 }
-
+.footerWrapper a {
+    color: #f3f3f3;
+    text-decoration: underline;
+}
 footer div p {
     color: white;
 }
 
-h4,
-h3 {
-    overflow: hidden;
-}
-hr {
-    background-color: #555;
-    margin: auto;
-}
 
+
+
+
+
+/* Helpful links */
 #helpful-links {
     display: block;
     margin: auto;
@@ -94,11 +149,16 @@ hr {
 #helpful-links p {
     font-size: 16px;
 }
-table,
-tbody {
-    width: 90%;
+#faq {
+    text-align: center;
+    padding-left: 1rem;
 }
 
+
+
+
+
+/* Bootstrap navbar */
 .navbar-brand {
     font-size: 24px;
 }
@@ -114,28 +174,29 @@ tbody {
     transition: ease-in 0.1s;
 }
 
-.footerWrapper a {
-    color: #f3f3f3;
-    text-decoration: underline;
-}
-.link a {
-    color: #000;
-    text-decoration: underline;
-}
 
+
+
+
+/* Trends */
 #trends {
     position: relative;
     display: block;
     margin: 0 auto;
 }
-.w-90-95 {
-    width: 90%;
+#trends a {
+    color: #333;
 }
-canvas{
+
+
+
+
+
+/* Charts */
+canvas {
     margin: 2em auto;
     border-radius: 10px;
 }
-
 .canvasred {
     background-color: rgb(255, 221, 221);
 }
@@ -145,29 +206,13 @@ canvas{
 .canvasgrey {
     background-color: rgb(233, 233, 233);
 }
-#trends a {
-    color: #333;
-}
 
-.w-90-95 hr {
-    color: #555;
-}
-#faq {
-    text-align: center;
-    padding-left: 1rem;
-}
-#last-updated {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-left: 5rem;
-    color: #555;
-}
+
+
+
 
 @media only screen and (max-width: 768px) {
-    #last-updated {
-        padding-left: 1rem;
-    }
+    
     table,
     tbody,
     hr {
@@ -177,11 +222,14 @@ canvas{
     .w-90-95 {
         width: 95%;
     }
+
+
+    /* Summary */
     .summary {
         flex-direction: column;
         padding: 3rem 0 1rem 0;
     }
-}
-@media only screen and (max-width: 1440px){
-
+    #last-updated {
+        padding-left: 1rem;
+    }
 }

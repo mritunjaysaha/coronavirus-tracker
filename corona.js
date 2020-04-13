@@ -46,61 +46,6 @@ const addSummary = async () => {
     };
     createTable(tableElements);
 };
-
-function timeToWords(time, lang) {
-    lang = lang || {
-        postfixes: {
-            "<": " ago",
-            ">": " from now",
-        },
-        1000: {
-            singular: "a few moments",
-            plural: "a few moments",
-        },
-        60000: {
-            singular: "about a minute",
-            plural: "# minutes",
-        },
-        3600000: {
-            singular: "about an hour",
-            plural: "# hours",
-        },
-        86400000: {
-            singular: "a day",
-            plural: "# days",
-        },
-    };
-
-    var timespans = [1000, 60000, 3600000, 86400000];
-    var parsedTime = Date.parse(time.replace(/\-00:?00$/, ""));
-
-    if (parsedTime && Date.now) {
-        var timeAgo = parsedTime - Date.now();
-        var diff = Math.abs(timeAgo);
-        var postfix = lang.postfixes[timeAgo < 0 ? "<" : ">"];
-        var timespan = timespans[0];
-
-        for (var i = 1; i < timespans.length; i++) {
-            if (diff > timespans[i]) {
-                timespan = timespans[i];
-            }
-        }
-
-        var n = Math.round(diff / timespan);
-
-        return (
-            lang[timespan][n > 1 ? "plural" : "singular"].replace("#", n) +
-            postfix
-        );
-    }
-}
-function createPtag(id, data) {
-    let container = document.getElementById(id);
-    let p = document.createElement("p");
-    p.innerHTML = data;
-    container.appendChild(p);
-}
-
 const addHelplineData = async () => {
     const response = await fetch(URL1);
     const processedResponse = await response.json();
@@ -120,6 +65,9 @@ const addCharts = async () => {
     const response = await fetch(URL2);
     const processedResponse = await response.json();
 
+    await addSummary(); //The summary function is called here so that the increase in number of cases appear after total cases
+    
+    
     const totalCasesData = [];
     let arrCasesDate = [];
     const dailyIncrease = [];
@@ -134,6 +82,37 @@ const addCharts = async () => {
         legendDisplay: false,
         type: "",
     };
+
+    // Increase in total cases
+    const len = processedResponse.data.length - 1;
+    const increaseInCases =
+        processedResponse.data[len].summary.total -
+        processedResponse.data[len - 1].summary.total;
+    createPtagIncreaseCases("total-cases", increaseInCases);
+
+    // Increase in cases of Indians
+    const increaseIndian =
+        processedResponse.data[len].summary.confirmedCasesIndian -
+        processedResponse.data[len - 1].summary.confirmedCasesIndian;
+    createPtagIncreaseCases("confirmed-india", increaseIndian);
+
+    // Increase in cases of Foreigners
+    const increaseForiegner =
+        processedResponse.data[len].summary.confirmedCasesForeign -
+        processedResponse.data[len - 1].summary.confirmedCasesForeign;
+    createPtagIncreaseCases("confirmed-foreign", increaseForiegner);
+
+    // Increase in recovered cases
+    const increaseRecovered =
+        processedResponse.data[len].summary.discharged -
+        processedResponse.data[len - 1].summary.discharged;
+    createPtagIncreaseCases("recovered", increaseRecovered);
+
+    // Increase in deaths
+    const increaseDeaths =
+        processedResponse.data[len].summary.deaths -
+        processedResponse.data[len - 1].summary.deaths;
+    createPtagIncreaseCases("fatal", increaseDeaths);
 
     //Total number of days
     const days = processedResponse.data.length;
@@ -256,22 +235,107 @@ const addCharts = async () => {
     makeChart(chartElements);
 };
 
-function formatDate(dateArray) {
-    for (let i = 0; i < dateArray.length; i++) {
-        str = dateArray[i].slice(5);
-        dateArray[i] = str;
+function createTable(object) {
+    const stateList = object.stateList;
+    const colHeader = object.colHeader;
+    const containerId = object.containerId;
+    const columnsLen = object.columns;
+    let col = [];
+    for (let i = 0; i < stateList.length; i++) {
+        for (let key in stateList[i]) {
+            if (col.indexOf(key) === -1) {
+                col.push(key);
+            }
+        }
     }
-    return dateArray;
+
+    //create dynamic table
+    let table = document.createElement("table");
+    let fragment = document.createDocumentFragment();
+    //CREATE HTML TABLE HEARDER ROW USING THE EXTRACTED HEADERS ABOVE
+    let tr = table.insertRow(-1); //TABLE ROW
+
+    for (let i = 0; i < columnsLen; i++) {
+        let th = document.createElement("th");
+        th.innerHTML = colHeader[i];
+        fragment.appendChild(th);
+    }
+    tr.appendChild(fragment);
+    //ADD JSON DATA TO THE TABLE AS ROWS
+    for (let i = 0; i < stateList.length; i++) {
+        tr = table.insertRow(-1);
+        for (let j = 0; j < columnsLen; j++) {
+            let tabCell = tr.insertCell(-1);
+            tabCell.innerHTML = stateList[i][col[j]];
+        }
+    }
+
+    //FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+    const divContainer = document.getElementById(containerId);
+    divContainer.innerHTML = "";
+    divContainer.appendChild(table);
 }
 
-function updateElements(dataObject, id, title, array, color, chartType) {
-    dataObject.chartId = id;
-    dataObject.dataArray = array;
-    dataObject.backgroundColor = color;
-    dataObject.type = chartType;
-    dataObject.title = title;
+function timeToWords(time, lang) {
+    lang = lang || {
+        postfixes: {
+            "<": " ago",
+            ">": " from now",
+        },
+        1000: {
+            singular: "a few moments",
+            plural: "a few moments",
+        },
+        60000: {
+            singular: "about a minute",
+            plural: "# minutes",
+        },
+        3600000: {
+            singular: "about an hour",
+            plural: "# hours",
+        },
+        86400000: {
+            singular: "a day",
+            plural: "# days",
+        },
+    };
+
+    var timespans = [1000, 60000, 3600000, 86400000];
+    var parsedTime = Date.parse(time.replace(/\-00:?00$/, ""));
+
+    if (parsedTime && Date.now) {
+        var timeAgo = parsedTime - Date.now();
+        var diff = Math.abs(timeAgo);
+        var postfix = lang.postfixes[timeAgo < 0 ? "<" : ">"];
+        var timespan = timespans[0];
+
+        for (var i = 1; i < timespans.length; i++) {
+            if (diff > timespans[i]) {
+                timespan = timespans[i];
+            }
+        }
+
+        var n = Math.round(diff / timespan);
+
+        return (
+            lang[timespan][n > 1 ? "plural" : "singular"].replace("#", n) +
+            postfix
+        );
+    }
+}
+function createPtag(id, data) {
+    let container = document.getElementById(id);
+    let p = document.createElement("p");
+    p.innerHTML = data;
+    container.appendChild(p);
 }
 
+function createPtagIncreaseCases(id, data) {
+    let container = document.getElementById(id);
+    let p = document.createElement("p");
+    p.innerHTML = `[+${data}]`;
+    container.appendChild(p);
+}
 function makeChart(elements) {
     let myChart = document.getElementById(`${elements.chartId}`);
 
@@ -340,47 +404,22 @@ function makeChart(elements) {
         },
     });
 }
-function createTable(object) {
-    const stateList = object.stateList;
-    const colHeader = object.colHeader;
-    const containerId = object.containerId;
-    const columnsLen = object.columns;
-    let col = [];
-    for (let i = 0; i < stateList.length; i++) {
-        for (let key in stateList[i]) {
-            if (col.indexOf(key) === -1) {
-                col.push(key);
-            }
-        }
+function formatDate(dateArray) {
+    for (let i = 0; i < dateArray.length; i++) {
+        str = dateArray[i].slice(5);
+        dateArray[i] = str;
     }
-
-    //create dynamic table
-    let table = document.createElement("table");
-    let fragment = document.createDocumentFragment();
-    //CREATE HTML TABLE HEARDER ROW USING THE EXTRACTED HEADERS ABOVE
-    let tr = table.insertRow(-1); //TABLE ROW
-
-    for (let i = 0; i < columnsLen; i++) {
-        let th = document.createElement("th");
-        th.innerHTML = colHeader[i];
-        fragment.appendChild(th);
-    }
-    tr.appendChild(fragment);
-    //ADD JSON DATA TO THE TABLE AS ROWS
-    for (let i = 0; i < stateList.length; i++) {
-        tr = table.insertRow(-1);
-        for (let j = 0; j < columnsLen; j++) {
-            let tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = stateList[i][col[j]];
-        }
-    }
-
-    //FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-    const divContainer = document.getElementById(containerId);
-    divContainer.innerHTML = "";
-    divContainer.appendChild(table);
+    return dateArray;
 }
 
-window.onload = addSummary();
+function updateElements(dataObject, id, title, array, color, chartType) {
+    dataObject.chartId = id;
+    dataObject.dataArray = array;
+    dataObject.backgroundColor = color;
+    dataObject.type = chartType;
+    dataObject.title = title;
+}
+
+// window.onload = addSummary();
 window.onload = addHelplineData();
 window.onload = addCharts();
