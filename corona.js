@@ -250,7 +250,6 @@ function createTable(object, increaseData, makeChanges) {
     }
 
     const len =  (makeChanges === true) ? increaseData.data.length - 1 : 0;
-    // console.log(increaseData.data[38].regional[0].loc)
     //create dynamic table
     let table = document.createElement("table");
     let fragment = document.createDocumentFragment();
@@ -271,7 +270,6 @@ function createTable(object, increaseData, makeChanges) {
         for (let j = 0; j < columnsLen; j++) {
             tabCell = tr.insertCell(-1);
             if (makeChanges === true) {
-                if(increaseData.data[len].regional[i].loc ==  increaseData.data[len-1].regional[i].loc)
                 incIndian =
                     increaseData.data[len].regional[i].confirmedCasesIndian -
                     increaseData.data[len - 1].regional[i].confirmedCasesIndian;
