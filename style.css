@@ -21,19 +21,11 @@ hr {
     width: 90%;
 }
 
-
-
-
-
 /* Hiding the overflow of header tags */
 h4,
 h3 {
     overflow: hidden;
 }
-
-
-
-
 
 /* TABLE */
 th,
@@ -52,7 +44,7 @@ th,
 td {
     border-collapse: collapse;
     padding: 1.2em 0.2em 0 0.2em;
-    
+
     text-align: center;
     margin: auto;
     overflow-x: hidden;
@@ -77,27 +69,35 @@ tbody {
     width: 90%;
 }
 
-
-table tr p{
+table tr p {
     align-items: center;
 }
-.ptags{
+.ptags {
     display: inline-flex;
     flex-direction: row;
 }
-.ptags p{
+.ptags p {
     padding-right: 0.2em;
 }
-.ptags-inc{
+.ptags-inc-red {
     color: #f00;
     font-weight: 100;
 }
-.fas{
+.ptags-inc-green {
+    color: rgb(25, 150, 25);
+    font-weight: 100;
+}
+.ptags-inc-grey {
+    color: #aaa;
+    font-weight: 100;
+}
+.ptags-inc-yellow {
+    color: rgba(233, 236, 9, 0.829);
+    font-weight: 100;
+}
+.fas {
     font-size: 10px;
 }
-
-
-
 
 /* summary of cases */
 .summary {
@@ -122,15 +122,10 @@ table tr p{
     padding-left: 5rem;
     color: #555;
 }
-.summary div p:nth-child(3){
+.summary div p:nth-child(3) {
     color: #999;
     font-size: 12px;
-    
 }
-
-
-
-
 
 /* footer */
 .footerWrapper {
@@ -154,11 +149,6 @@ footer div p {
     color: white;
 }
 
-
-
-
-
-
 /* Helpful links */
 #helpful-links {
     display: block;
@@ -173,10 +163,6 @@ footer div p {
     text-align: center;
     padding-left: 1rem;
 }
-
-
-
-
 
 /* Bootstrap navbar */
 .navbar-brand {
@@ -194,10 +180,6 @@ footer div p {
     transition: ease-in 0.1s;
 }
 
-
-
-
-
 /* Trends */
 #trends {
     position: relative;
@@ -207,10 +189,6 @@ footer div p {
 #trends a {
     color: #333;
 }
-
-
-
-
 
 /* Charts */
 canvas {
@@ -227,10 +205,6 @@ canvas {
     background-color: rgb(233, 233, 233);
 }
 
-
-
-
-
 @media only screen and (max-width: 768px) {
     /* Table */
     table,
@@ -238,14 +212,13 @@ canvas {
     hr {
         width: 95%;
     }
-    .ptags{
+    .ptags {
         flex-direction: column;
     }
 
     .w-90-95 {
         width: 95%;
     }
-
 
     /* Summary */
     .summary {

@@ -47,7 +47,16 @@ const addSummary = async () => {
     const increaseForiegner =
         processedResponse2.data[len].summary.confirmedCasesForeign -
         processedResponse2.data[len - 1].summary.confirmedCasesForeign;
-    createPtagIncreaseCases("confirmed-foreign", increaseForiegner);
+
+    foreignerContainer = document.getElementById("confirmed-foreign");
+    let p = document.createElement("p");
+
+    if (increaseForiegner > 0) {
+        p.innerHTML = `[+${increaseForeigner}]`;
+    } else {
+        p.innerHTML = "";
+    }
+    foreignerContainer.appendChild(p);
 
     // Increase in recovered cases
     const increaseRecovered =
@@ -81,7 +90,6 @@ const addSummary = async () => {
     createTable(tableElements, processedResponse2, true);
 
     addCharts(processedResponse2);
-    
 };
 const addHelplineData = async () => {
     const response = await fetch(URL1);
@@ -249,7 +257,7 @@ function createTable(object, increaseData, makeChanges) {
         }
     }
 
-    const len =  (makeChanges === true) ? increaseData.data.length - 1 : 0;
+    const len = makeChanges === true ? increaseData.data.length - 1 : 0;
     //create dynamic table
     let table = document.createElement("table");
     let fragment = document.createDocumentFragment();
@@ -292,7 +300,7 @@ function createTable(object, increaseData, makeChanges) {
                         tabCell.innerHTML = `
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc"><i class="fas fa-sort-up"></i>${incIndian}</p>
+                            <p class="ptags-inc-red"><i class="fas fa-sort-up"></i>${incIndian}</p>
                         </div>
                         `;
                     } else {
@@ -308,7 +316,7 @@ function createTable(object, increaseData, makeChanges) {
                         tabCell.innerHTML = `
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc">
+                            <p class="ptags-inc-green">
                             <i class="fas fa-sort-up"></i>${incRecovered}</p>
                         </div>
                         `;
@@ -325,7 +333,7 @@ function createTable(object, increaseData, makeChanges) {
                         tabCell.innerHTML = `
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc">
+                            <p class="ptags-inc-grey">
                             <i class="fas fa-sort-up"></i>${incDeaths}</p>
                         </div>
                         `;
@@ -342,7 +350,7 @@ function createTable(object, increaseData, makeChanges) {
                         tabCell.innerHTML = `
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc">
+                            <p class="ptags-inc-yellow">
                             <i class="fas fa-sort-up"></i>${incForeigner}</p>
                         </div>
                         `;
