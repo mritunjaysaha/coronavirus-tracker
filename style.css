@@ -206,7 +206,6 @@ footer div p {
 }
 /* Charts */
 canvas {
-    margin: 2em auto;
     border-radius: 10px;
 }
 .canvasred {
