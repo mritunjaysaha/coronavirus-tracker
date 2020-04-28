@@ -192,11 +192,15 @@ footer div p {
 .charts-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
     position: relative;
     width: 100%;
     justify-content: center;
+    align-items: center;
 }
 .charts {
+    margin: 0 auto;
     float: left;
     margin: 0.25em;
     /* width: 100%; */
@@ -207,6 +211,7 @@ footer div p {
 /* Charts */
 canvas {
     border-radius: 10px;
+    margin-top: 1em;
 }
 .canvasred {
     background-color: rgb(255, 221, 221);
