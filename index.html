@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161418750-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-161418750-2');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1bbc96">
@@ -82,7 +92,7 @@
     </div>
 
     <!-- Trends -->
-    <div id="trends" class="w-90-95">
+    <div id="trends" class="w-90-95 ">
         <h3 class="text-center padding">Spread Trends</h3>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
@@ -95,16 +105,31 @@
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="cumulative" role="tabpanel"
+            <div class="tab-pane fade show active charts-container" id="cumulative" role="tabpanel"
                 aria-labelledby="cumulative-tab">
-                <canvas height="100" width="150" class="padding canvasred" id="confirmedCasesCumulative"></canvas>
-                <canvas height="100" width="150" class="padding canvasgreen" id="recoveredCumulative"></canvas>
-                <canvas height="100" width="150" class="padding canvasgrey" id="deathsCumulative"></canvas>
+                <div class="charts ">
+                    <canvas class="canvasred" id="confirmedCasesCumulative"></canvas>
+
+                </div>
+                <div class="charts ">
+                    <canvas class="canvasgreen" id="recoveredCumulative"></canvas>
+
+                </div>
+                <div class="charts ">
+                    <canvas class="canvasgrey" id="deathsCumulative"></canvas>
+                </div>
+
             </div>
             <div class="tab-pane fade" id="daily" role="tabpanel" aria-labelledby="daily-tab">
-                <canvas height="100" width="150" class="padding canvasred" id="confirmedIncreaseDaily"></canvas>
-                <canvas height="100" width="150" class="padding canvasgreen" id="recoveredDaily"></canvas>
-                <canvas height="100" width="150" class="padding canvasgrey" id="deathsDaily"></canvas>
+                <div class="charts">
+                    <canvas class="canvasred" id="confirmedIncreaseDaily"></canvas>
+                </div>
+                <div class="charts">
+                    <canvas class="canvasgreen" id="recoveredDaily"></canvas>
+                </div>
+                <div class="charts">
+                    <canvas class="canvasgrey" id="deathsDaily"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -156,7 +181,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
-    <!--  -->
+    <!-- My scripts -->
     <script src="./corona.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
@@ -173,9 +198,6 @@
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/5c77b9e253.js" crossorigin="anonymous"></script>
 
-    <!-- Simple analytics -->
-    <script data-skip-dnt="true" async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
-    <noscript><img src="https://api.simpleanalytics.io/hello.gif" alt=""></noscript>
 
 </body>
 

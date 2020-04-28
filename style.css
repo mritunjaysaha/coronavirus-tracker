@@ -183,13 +183,24 @@ footer div p {
 /* Trends */
 #trends {
     position: relative;
-    display: block;
     margin: 0 auto;
 }
 #trends a {
     color: #333;
 }
-
+.charts-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-left: 0.4em;
+}
+.charts {
+    float: left;
+    margin: 0.25em;
+}
+.charts::after {
+    clear: both;
+}
 /* Charts */
 canvas {
     margin: 2em auto;
@@ -227,5 +238,9 @@ canvas {
     }
     #last-updated {
         padding-left: 1rem;
+    }
+
+    .charts-container {
+        margin-left: 0;
     }
 }

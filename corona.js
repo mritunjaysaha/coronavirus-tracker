@@ -439,8 +439,22 @@ function createPtagIncreaseCases(id, data) {
     container.appendChild(p);
 }
 function makeChart(elements) {
-    let myChart = document.getElementById(`${elements.chartId}`);
+    let myChart = document
+        .getElementById(`${elements.chartId}`)
+        .getContext("2d");
 
+    const heightWindow = window.screen.height;
+    const widthWindow = window.screen.width;
+    const heightCanvas = heightWindow / 4;
+    let widthCanvas;
+    if (widthWindow < 400) {
+        widthCanvas = 345;
+    } else {
+        widthCanvas = 400;
+    }
+
+    myChart.canvas.style.height = `${heightCanvas}px`;
+    myChart.canvas.style.width = `${widthCanvas}px`;
     let chart = new Chart(myChart, {
         type: elements.type,
         data: {
@@ -456,7 +470,8 @@ function makeChart(elements) {
             ],
         },
         options: {
-            responsive: true,
+            responsive: false,
+            maintainAspectRatio: true,
             scales: {
                 xAxes: [
                     {
