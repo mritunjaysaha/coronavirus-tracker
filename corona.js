@@ -446,13 +446,11 @@ function makeChart(elements) {
     // height and width of the window
     const heightWindow = window.screen.height;
     const widthWindow = window.screen.width;
-    console.log("width", widthWindow);
 
     // height of canvas
     const heightCanvas = heightWindow / 4;
     // width of the canvas for laptops/desktops
     const width = Math.round(widthWindow / 3.45);
-    console.log(width);
     // to select the width of the canvas
     let widthCanvas;
     if (widthWindow < 400) {
