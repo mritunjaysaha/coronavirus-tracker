@@ -451,7 +451,7 @@ function makeChart(elements) {
     // height of canvas
     const heightCanvas = heightWindow / 4;
     // width of the canvas for laptops/desktops
-    const width = Math.round(widthWindow / 3.415);
+    const width = Math.round(widthWindow / 3.45);
     console.log(width);
     // to select the width of the canvas
     let widthCanvas;
