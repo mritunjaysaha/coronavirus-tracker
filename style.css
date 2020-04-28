@@ -10,6 +10,7 @@ hr {
     background-color: #555;
     margin: auto;
 }
+
 .link a {
     color: #000;
     text-decoration: underline;
@@ -192,11 +193,13 @@ footer div p {
     display: flex;
     flex-direction: row;
     position: relative;
-    margin-left: 0.4em;
+    width: 100%;
+    justify-content: center;
 }
 .charts {
     float: left;
     margin: 0.25em;
+    /* width: 100%; */
 }
 .charts::after {
     clear: both;

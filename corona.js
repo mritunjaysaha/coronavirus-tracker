@@ -443,14 +443,21 @@ function makeChart(elements) {
         .getElementById(`${elements.chartId}`)
         .getContext("2d");
 
+    // height and width of the window
     const heightWindow = window.screen.height;
     const widthWindow = window.screen.width;
+
+    // height of canvas
     const heightCanvas = heightWindow / 4;
+    // width of the canvas for laptops/desktops
+    const width = Math.round(widthWindow / 3.8);
+
+    // to select the width of the canvas
     let widthCanvas;
     if (widthWindow < 400) {
         widthCanvas = 345;
     } else {
-        widthCanvas = 400;
+        widthCanvas = width;
     }
 
     myChart.canvas.style.height = `${heightCanvas}px`;
