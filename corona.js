@@ -448,19 +448,39 @@ function makeChart(elements) {
     const widthWindow = window.screen.width;
 
     // height of canvas
-    const heightCanvas = heightWindow / 4;
+    console.log(heightWindow);
+    console.log(widthWindow);
+
     // width of the canvas for laptops/desktops
     const width = Math.round(widthWindow / 3.45);
-    // to select the width of the canvas
-    let widthCanvas;
-    if (widthWindow <= 768) {
-        widthCanvas = width * 3.2;
+    let widthCanvas, heightCanvas;
+
+    if (widthWindow > heightWindow) {
+        // for desktop
+        if (widthWindow > 768) {
+            heightCanvas = Math.round(heightWindow / 4);
+            console.log("desktop: ", heightCanvas);
+        } else {
+            // for landscape mode
+            heightCanvas = Math.round(heightWindow / 1.5);
+            console.log("heightCanvasLandscape: ", heightCanvas);
+        }
     } else {
-        widthCanvas = width;
+        // for portrait
+        heightCanvas = Math.round(heightWindow / 3.5);
+        console.log("heightCanvas: ", heightCanvas);
     }
 
+    if (widthWindow <= 768) {
+        widthCanvas = Math.round(width * 3.2);
+        console.log("width: ", widthCanvas);
+    } else {
+        widthCanvas = width;
+        console.log("widthDesktop: ", widthCanvas);
+    }
     myChart.canvas.style.height = `${heightCanvas}px`;
     myChart.canvas.style.width = `${widthCanvas}px`;
+
     let chart = new Chart(myChart, {
         type: elements.type,
         data: {
