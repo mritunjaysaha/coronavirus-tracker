@@ -453,7 +453,7 @@ function makeChart(elements) {
     const width = Math.round(widthWindow / 3.45);
     // to select the width of the canvas
     let widthCanvas;
-    if (widthWindow < 400) {
+    if (widthWindow <= 768) {
         widthCanvas = width * 3.2;
     } else {
         widthCanvas = width;
