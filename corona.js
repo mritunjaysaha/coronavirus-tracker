@@ -300,7 +300,7 @@ function createTable(object, increaseData, makeChanges) {
                         tabCell.innerHTML = `
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc-red"><i class="fas fa-sort-up"></i>${incIndian}</p>
+                            <p class="ptags-inc-red"><i class="uil uil-arrow-up"></i></i>${incIndian}</p>
                         </div>
                         `;
                     } else {
@@ -317,7 +317,7 @@ function createTable(object, increaseData, makeChanges) {
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
                             <p class="ptags-inc-green">
-                            <i class="fas fa-sort-up"></i>${incRecovered}</p>
+                            <i class="uil uil-arrow-up"></i></i>${incRecovered}</p>
                         </div>
                         `;
                     } else {
@@ -334,7 +334,7 @@ function createTable(object, increaseData, makeChanges) {
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
                             <p class="ptags-inc-grey">
-                            <i class="fas fa-sort-up"></i>${incDeaths}</p>
+                            <i class="uil uil-arrow-up"></i></i>${incDeaths}</p>
                         </div>
                         `;
                     } else {
@@ -351,7 +351,7 @@ function createTable(object, increaseData, makeChanges) {
                         <div class="ptags">
                             <p >${stateList[i][col[j]]}</p>
                             <p class="ptags-inc-yellow">
-                            <i class="fas fa-sort-up"></i>${incForeigner}</p>
+                            <i class="uil uil-arrow-up"></i></i>${incForeigner}</p>
                         </div>
                         `;
                     } else {
