@@ -89,15 +89,12 @@ table tr p {
     font-weight: 100;
 }
 .ptags-inc-grey {
-    color: #aaa;
+    color: #777;
     font-weight: 100;
 }
 .ptags-inc-yellow {
     color: rgba(233, 236, 9, 0.829);
     font-weight: 100;
-}
-.fas {
-    font-size: 10px;
 }
 
 /* summary of cases */
@@ -190,12 +187,7 @@ footer div p {
     color: #333;
 }
 .charts-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     position: relative;
-    justify-content: center;
-    align-items: center;
     width: 100%;
 }
 .charts {
@@ -244,13 +236,7 @@ canvas {
         padding-left: 1rem;
     }
 
-    .charts-container {
-        /* align-items: center;
-        display: block;
-        position: relative;
-        margin: 0 auto; */
-    }
     .charts {
-        /* float: none; */
+        float: none;
     }
 }
