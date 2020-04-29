@@ -190,19 +190,17 @@ footer div p {
     color: #333;
 }
 .charts-container {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* flex-direction: row; */
     position: relative;
-    width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    width: 100%;
 }
 .charts {
     float: left;
     margin: 0.25em;
-    /* width: 100%; */
 }
 .charts::after {
     clear: both;
@@ -247,13 +245,12 @@ canvas {
     }
 
     .charts-container {
-        align-items: center;
+        /* align-items: center;
         display: block;
         position: relative;
-        margin: 0 auto;
+        margin: 0 auto; */
     }
     .charts {
-        float: none;
-        /* padding: 0.2em; */
+        /* float: none; */
     }
 }
