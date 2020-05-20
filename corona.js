@@ -5,8 +5,13 @@ const URL2 = "https://api.rootnet.in/covid19-in/stats/history";
 const addSummary = async () => {
     const response = await fetch(URL);
     const processedResponse = await response.json();
+
+    // console.log(processedResponse.data.regional[1]);
     const response2 = await fetch(URL2);
     const processedResponse2 = await response2.json();
+    console.log(processedResponse2);
+    console.log(processedResponse2.data[70].regional[1]);
+    console.log(processedResponse2.data[71].regional[1]);
 
     //create the p tags for summary
     const totalCases = processedResponse.data.summary.total;
@@ -75,11 +80,11 @@ const addSummary = async () => {
 
     // Values for table header
     let colHeaderStateWise = [
-        "State/UT",
         "Indian",
+        "Non-native",
         "Recovered",
         "Fatal",
-        "Foreign",
+        "State/UT",
     ];
     const tableElements = {
         stateList: stateListStatWise,
@@ -293,9 +298,7 @@ function createTable(object, increaseData, makeChanges) {
                     increaseData.data[len - 1].regional[i].deaths;
 
                 if (j === 0) {
-                    tabCell.innerHTML = `<p>${stateList[i][col[j]]}</p>`;
-                }
-                if (j === 1) {
+                    //increase in cases of indians
                     if (incIndian > 0) {
                         tabCell.innerHTML = `
                         <div class="ptags">
@@ -311,7 +314,26 @@ function createTable(object, increaseData, makeChanges) {
                         `;
                     }
                 }
+                if (j === 1) {
+                    //increase in cases of non-native
+                    if (incForeigner > 0) {
+                        tabCell.innerHTML = `
+                        <div class="ptags">
+                            <p >${stateList[i][col[j]]}</p>
+                            <p class="ptags-inc-yellow">
+                            <i class="uil uil-arrow-up"></i></i>${incForeigner}</p>
+                        </div>
+                        `;
+                    } else {
+                        tabCell.innerHTML = `
+                        <div class="ptags">
+                            <p >${stateList[i][col[j]]}</p>
+                        </div>
+                        `;
+                    }
+                }
                 if (j === 2) {
+                    //increse in recoveries
                     if (incRecovered > 0) {
                         tabCell.innerHTML = `
                         <div class="ptags">
@@ -329,6 +351,7 @@ function createTable(object, increaseData, makeChanges) {
                     }
                 }
                 if (j === 3) {
+                    // increase in deaths
                     if (incDeaths > 0) {
                         tabCell.innerHTML = `
                         <div class="ptags">
@@ -346,21 +369,8 @@ function createTable(object, increaseData, makeChanges) {
                     }
                 }
                 if (j === 4) {
-                    if (incForeigner > 0) {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                            <p class="ptags-inc-yellow">
-                            <i class="uil uil-arrow-up"></i></i>${incForeigner}</p>
-                        </div>
-                        `;
-                    } else {
-                        tabCell.innerHTML = `
-                        <div class="ptags">
-                            <p >${stateList[i][col[j]]}</p>
-                        </div>
-                        `;
-                    }
+                    // stateList
+                    tabCell.innerHTML = `<p>${stateList[i][col[j]]}</p>`;
                 }
             } else {
                 tabCell.innerHTML = `
@@ -447,10 +457,6 @@ function makeChart(elements) {
     const heightWindow = window.screen.height;
     const widthWindow = window.screen.width;
 
-    // height of canvas
-    console.log(heightWindow);
-    console.log(widthWindow);
-
     // width of the canvas for laptops/desktops
     const width = Math.round(widthWindow / 3.45);
     let widthCanvas, heightCanvas;
@@ -459,24 +465,19 @@ function makeChart(elements) {
         // for desktop
         if (widthWindow > 768) {
             heightCanvas = Math.round(heightWindow / 4);
-            console.log("desktop: ", heightCanvas);
         } else {
             // for landscape mode
             heightCanvas = Math.round(heightWindow / 1.5);
-            console.log("heightCanvasLandscape: ", heightCanvas);
         }
     } else {
         // for portrait
         heightCanvas = Math.round(heightWindow / 3.5);
-        console.log("heightCanvas: ", heightCanvas);
     }
 
     if (widthWindow <= 768) {
         widthCanvas = Math.round(width * 3.2);
-        console.log("width: ", widthCanvas);
     } else {
         widthCanvas = width;
-        console.log("widthDesktop: ", widthCanvas);
     }
     myChart.canvas.style.height = `${heightCanvas}px`;
     myChart.canvas.style.width = `${widthCanvas}px`;
