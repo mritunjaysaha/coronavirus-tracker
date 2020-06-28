@@ -7,3 +7,6 @@
 ## website
 
 https://covidupdate.netlify.app/
+
+## Project Review
+[Review](https://github.com/tanaypratap/teamtanay.jobchallenge.dev/issues/315)
